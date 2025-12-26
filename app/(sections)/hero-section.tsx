@@ -23,7 +23,7 @@ export default function HeroSection() {
             Transformo ideias em experiências digitais elegantes e funcionais.
             Apaixonada por código limpo e design intuitivo.
           </p>
-          <Button variant="pink" className='rounded-full mt-8 px-10 py-6 !text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(244,114,182,0.6)] hover:scale-105'>
+          <Button variant="pink" className='rounded-full mt-8 px-20 py-6 !text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(244,114,182,0.6)] hover:scale-105'>
             <a href="/files/Currículo joana 2024.pdf" target="_blank" rel="noopener noreferrer" className='flex flex-row items-center gap-2'>
               <ArrowDownToLine /> <div>Baixar CV</div>
             </a>
@@ -39,10 +39,10 @@ export default function HeroSection() {
         </div>
         <div className="relative justify-center hidden md:flex ">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="absolute w-[420px] h-[420px] rounded-full bg-pink/60 blur-3xl" />
+            <div className="absolute w-[500px] h-[500px] rounded-full bg-pink/60 blur-3xl" />
             <div className="w-[380px] h-[380px] rounded-full bg-pink border-10 border-white" />
           </div>
-          <Image alt="Logo" src="/images/imagem-joana-Photoroom.png" width={500} height={500} className="relative z-10 pt-10" />
+          <Image alt="Logo" src="/images/imagem-joana-Photoroom.png" width={500} height={500} className="relative z-10 pt-15" />
         </div>
       </div>
     </section>

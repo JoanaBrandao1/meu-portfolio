@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Theme, GithubLink, LinkedinLink, EmailLink } from "@/app/links";
+import { GithubLink, LinkedinLink, EmailLink } from "@/app/links";
 
 export function Navbar() {
   return (
@@ -22,7 +22,6 @@ export function Navbar() {
           <div className="ml-8 flex items-center gap-2">
             <GithubLink />
             <LinkedinLink />
-            <Theme />
             <EmailLink/>
           </div>
         </div>
