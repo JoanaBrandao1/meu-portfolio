@@ -30,14 +30,14 @@ export default function AboutSection() {
 
   const education = [
     {
-      title: "Bacharelado em Ciência da Computação",
-      institution: "Universidade Federal de São Paulo",
-      year: "2018 - 2022",
+      title: "Bacharelado em Engenharia da Computação",
+      institution: "Universidade Federal Rural de Pernambuco",
+      year: "2020 - 2026",
     },
     {
-      title: "Especialização em UX/UI Design",
-      institution: "Instituto de Design Digital",
-      year: "2023",
+      title: "Técnico em Desenvolvimento de Sistemas",
+      institution: "Escola Técnica Estadual Advogado José David Gil Rodrigues",
+      year: "2017 - 2019",
     },
   ];
 
