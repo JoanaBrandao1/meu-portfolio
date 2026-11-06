@@ -2,7 +2,7 @@ import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
 import { Neon } from "@/components/neon";
 import { Sparkle } from "@/components/sparkle";
 import { CoverCarousel } from "@/components/cover-carousel";
-import { Pompom, PompomFilter } from "@/components/pompom";
+import { Pompom } from "@/components/pompom";
 
 export default function ProjectsSection() {
   const released = PROJECTS.length;
@@ -10,16 +10,15 @@ export default function ProjectsSection() {
 
   return (
     <section id="faixas" className="section">
-      <PompomFilter />
       <Neon kind="coqueiro" style={{ left: "-2.5rem", bottom: "0.5rem", width: "13rem" }} />
       <Sparkle className="flash flash--lime" style={{ top: "4rem", left: "3%", width: "1.8rem" }} />
       <Sparkle className="flash flash--pink" style={{ top: "5rem", right: "5%", width: "2.6rem" }} />
 
       {/* pompons */}
-      <Pompom size="6.5rem" style={{ top: "2.5rem", right: "13%" }} />
-      <Pompom size="4rem" style={{ top: "6.5rem", right: "9%" }} />
-      <Pompom size="4.5rem" chain style={{ top: "0", left: "8%" }} />
-      <Pompom size="5.5rem" className="pompom--desktop" style={{ bottom: "3rem", right: "4%" }} />
+      <Pompom size="7.5rem" style={{ top: "2rem", right: "12%", rotate: "-12deg" }} />
+      <Pompom size="4.5rem" style={{ top: "7rem", right: "7.5%", rotate: "20deg" }} />
+      <Pompom size="5rem" shape="coracao" chain style={{ top: "0", left: "8%" }} />
+      <Pompom size="6.5rem" shape="coracao" className="pompom--desktop" style={{ bottom: "3rem", right: "4%", rotate: "10deg" }} />
 
       <div className="wrap">
         <header className="section-head">

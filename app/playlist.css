@@ -1360,14 +1360,10 @@ body::before {
   pointer-events: none;
 }
 
-.pompom__ball {
+.pompom__img {
   width: var(--size);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 36% 30%, #ffe1ef 0 7%, rgb(255 225 239 / 0) 26%),
-    radial-gradient(circle, #ff9ccb 0%, #ff6cb5 45%, #ef4a9b 75%, #c92f7d 100%);
-  filter: url(#pompom-pelo) drop-shadow(0 8px 10px rgb(80 10 40 / 0.35));
+  height: auto;
+  filter: drop-shadow(0 8px 10px rgb(80 10 40 / 0.35));
 }
 
 /* chaveiro: argola dourada + correntinha */
@@ -1375,7 +1371,7 @@ body::before {
   position: relative;
   width: 3px;
   height: 3.2rem;
-  margin-bottom: -0.4rem;
+  margin-bottom: -0.9rem;
   background: repeating-linear-gradient(180deg, #f6dc8c 0 5px, #b8892a 5px 7px);
   border-radius: 2px;
 }
