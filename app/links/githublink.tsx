@@ -1,3 +1,4 @@
+import { SOCIAL_LINKS } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { FiGithub } from 'react-icons/fi'
@@ -10,10 +11,10 @@ export const GithubLink = () => {
 
           <Button
             variant="ghost"
-            className='rounded-full p-2'
+            className='rounded-full p-2 size-9'
             asChild
           >
-            <a href="https://github.com/JoanaBrandao1" target="_blank" rel="noopener noreferrer">
+            <a aria-label="GitHub" href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
               <FiGithub className="size-5" />
             </a>
           </Button>

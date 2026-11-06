@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Navbar } from "@/components/layout/navbar";
+import "./globals.css";
+import "./playlist.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Archivo tem eixo de largura: condensada nos títulos, normal no texto.
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Meu Portfólio",
-  description: "Portfólio de desenvolvedor full-stack",
+  title: "Joana Brandão · Desenvolvedora front-end",
+  description:
+    "Portfólio de Joana Brandão, desenvolvedora front-end. Projetos, sobre e contato.",
 };
 
 export default function RootLayout({
@@ -25,11 +30,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      className={`${archivo.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <div className="pt-16">{children}</div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

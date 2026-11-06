@@ -1,3 +1,4 @@
+import { SITE } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Mail } from 'lucide-react'
@@ -10,10 +11,10 @@ export const EmailLink = () => {
 
           <Button
             variant="ghost"
-            className='rounded-full p-2'
+            className='rounded-full p-2 size-9'
             asChild
           >
-            <a href="mailto:joanab.dev@gmail.com?subject=Contato&body=Olá Joana" target="_blank" rel="noopener noreferrer">
+            <a aria-label="Enviar um email" href={`mailto:${SITE.email}`}>
               <Mail className="size-5" />
             </a>
           </Button>

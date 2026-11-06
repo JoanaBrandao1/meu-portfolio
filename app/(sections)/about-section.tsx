@@ -1,16 +1,45 @@
+// Este texto é um rascunho. Reescreva com as suas palavras: é o que mais deixa o site com a sua cara.
+
+const credits = [
+  { label: "Produção", value: "Joana Brandão" },
+  { label: "Instrumentos", value: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS" },
+  { label: "Também toca", value: "C# e Unity, Haskell" },
+  { label: "Em estúdio", value: "Os primeiros projetos do portfólio" },
+];
+
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 flex flex-col justify-center min-h-screen">
-      <div className="container mx-auto px-8 text-center">
-        <h2 className="text-6xl md:text-7xl font-bold mb-12 text-foreground">
-          Sobre <span className="text-pink">Mim</span>
-        </h2>
-        <div className="max-w-4xl mx-auto">
-          <p className="text-xl leading-relaxed text-pink-foreground/70">
-            Sou uma desenvolvedora apaixonada por tecnologia e design, com foco em criar
-            soluções digitais que fazem a diferença. Combino conhecimento técnico sólido
-            com sensibilidade estética para entregar produtos excepcionais.
-          </p>
+    <section id="sobre" className="section">
+      <div className="wrap">
+        <header className="section-head">
+          <div>
+            <p className="label">Lado A · Encarte</p>
+            <h2 className="display">Sobre mim</h2>
+          </div>
+        </header>
+
+        <div className="notes__grid">
+          <div className="notes__text">
+            <p>
+              Sou desenvolvedora front-end. Comecei com joguinhos no navegador e
+              um primeiro jogo na Unity, e foi aí que entendi que gosto mesmo é da
+              parte que a pessoa vê e clica.
+            </p>
+            <p>
+              Hoje estudo React e Next.js e tento fazer interfaces que funcionem
+              bem e que não pareçam todas iguais. Este site é o meu primeiro
+              álbum, e ele ainda está sendo gravado.
+            </p>
+          </div>
+
+          <dl className="credits">
+            {credits.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

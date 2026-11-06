@@ -1,48 +1,124 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ArrowDownToLine } from "lucide-react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
+import { SITE } from "@/lib/constants";
+
+const DURATION = 197; // 3:17, a "duração" da faixa de abertura
+
+function formatTime(seconds: number) {
+  const m = Math.floor(seconds / 60);
+  const s = String(seconds % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
 
 export default function HeroSection() {
-  return (
-    <section className="h-screen flex flex-col justify-center text-left px-8 ">
-      <div className="justify-around flex flex-row">
-        <div >
-          <span className="uppercase font-bold tracking-widest text-baby-pink mb-4">
-            Desenvolvedora Front-end
-          </span>
+  const [playing, setPlaying] = useState(true);
+  const [elapsed, setElapsed] = useState(42);
 
-          <h1 className="text-7xl md:text-7xl font-bold leading-tight">
-            Olá! Me chamo
+  // quem pediu "menos movimento" no sistema começa com o disco parado
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPlaying(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => setElapsed((t) => (t + 1) % DURATION), 1000);
+    return () => clearInterval(id);
+  }, [playing]);
+
+  return (
+    <section id="inicio" className="np" data-playing={playing}>
+      <div className="wrap np__grid">
+        <div>
+          <p className="label np__now">
+            <span className="eq" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
+            {playing ? "Tocando agora" : "Pausado"}
+          </p>
+
+          <h1 className="display np__title">
+            Joana
             <br />
-            <span className="text-pink">Joana Brandão</span>
+            <em>Brandão</em>
           </h1>
 
-          <p className="text-pink-foreground/60 mt-6 max-w-lg text-xl">
-            Transformo ideias em experiências digitais elegantes e funcionais.
-            Apaixonada por código limpo e design intuitivo.
+          <p className="np__lead">
+            <strong>{SITE.role}.</strong> Gosto de interface que tem
+            personalidade: cor, ritmo e um detalhe que faz a pessoa sorrir.
           </p>
-          <Button variant="pink" className='rounded-full mt-8 px-10 py-6 !text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(244,114,182,0.6)] hover:scale-105'>
-            <a href="/files/Currículo joana 2024.pdf" target="_blank" rel="noopener noreferrer" className='flex flex-row items-center gap-2'>
-              <ArrowDownToLine /> <div>Baixar CV</div>
+
+          <div className="np__actions">
+            <a className="btn btn--solid" href={SITE.cv} download>
+              <ArrowDownToLine aria-hidden="true" />
+              Baixar CV
             </a>
-          </Button>
-          <div className='flex items-center gap-2 mt-4'>
-            <div className="relative flex items-center justify-center">
-              <span className="absolute inline-flex h-3 w-3 rounded-full bg-pink opacity-75 animate-ping"></span>
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-pink"></span>
+            <a className="btn btn--ghost" href="#faixas">
+              <ArrowDown aria-hidden="true" />
+              Ver as faixas
+            </a>
+          </div>
+
+          <p className="label np__status">Disponível para novos projetos</p>
+        </div>
+
+        <div className="np__art">
+          <div className="cover">
+            <div className="record" aria-hidden="true" />
+            <div className="sleeve">
+              <div className="sleeve__title">
+                <span>{SITE.name}</span>
+                <span>Vol. 1</span>
+              </div>
+              <Image
+                src="/images/imagem-joana-Photoroom.png"
+                alt="Joana dançando de fone de ouvido"
+                width={1024}
+                height={1024}
+                sizes="(max-width: 860px) 24rem, 30rem"
+                priority
+              />
+              <span className="sleeve__sticker">Edição de estreia</span>
+            </div>
+          </div>
+
+          <div className="player">
+            <button
+              type="button"
+              className="player__btn"
+              onClick={() => setPlaying((p) => !p)}
+              aria-label={playing ? "Pausar" : "Tocar"}
+            >
+              {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+            </button>
+
+            <div className="player__meta">
+              <b>Olá, eu sou a Joana</b>
+              <span className="label">Faixa 00</span>
             </div>
 
-            <div className='text-pink'>Disponível para novos projetos</div>
+            <div className="player__bar">
+              <span className="player__time">{formatTime(elapsed)}</span>
+              <div className="player__track">
+                <div
+                  className="player__fill"
+                  style={{
+                    width: `${(elapsed / DURATION) * 100}%`,
+                    // quando a faixa recomeça, a barra volta sem animar
+                    transition: elapsed === 0 ? "none" : undefined,
+                  }}
+                />
+              </div>
+              <span className="player__time">{formatTime(DURATION)}</span>
+            </div>
           </div>
-        </div>
-        <div className="relative justify-center hidden md:flex ">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="absolute w-[420px] h-[420px] rounded-full bg-pink/60 blur-3xl" />
-            <div className="w-[380px] h-[380px] rounded-full bg-pink border-10 border-white" />
-          </div>
-          <Image alt="Logo" src="/images/imagem-joana-Photoroom.png" width={500} height={500} className="relative z-10 pt-10" />
         </div>
       </div>
     </section>

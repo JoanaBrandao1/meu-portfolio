@@ -1,91 +1,67 @@
+import { ArrowUpRight } from "lucide-react";
+import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
 export default function ProjectsSection() {
-  const projects = [
-    {
-      id: 1,
-      title: 'E-commerce Platform',
-      description: 'Plataforma completa de e-commerce com carrinho de compras, pagamentos integrados e painel administrativo.',
-      tech: ['Next.js', 'TypeScript', 'Stripe', 'MongoDB'],
-      image: '🛒',
-      link: '#'
-    },
-    {
-      id: 2,
-      title: 'Task Manager App',
-      description: 'Aplicativo de gerenciamento de tarefas com sincronização em tempo real e colaboração em equipe.',
-      tech: ['React', 'Firebase', 'Tailwind CSS'],
-      image: '✅',
-      link: '#'
-    },
-    {
-      id: 3,
-      title: 'Weather Dashboard',
-      description: 'Dashboard de previsão do tempo com mapas interativos e alertas personalizados.',
-      tech: ['React', 'API REST', 'Chart.js'],
-      image: '🌤️',
-      link: '#'
-    },
-    {
-      id: 4,
-      title: 'Social Media App',
-      description: 'Rede social com chat em tempo real, posts, likes e sistema de seguidores.',
-      tech: ['Next.js', 'Socket.io', 'PostgreSQL'],
-      image: '📱',
-      link: '#'
-    },
-    {
-      id: 5,
-      title: 'Portfolio CMS',
-      description: 'Sistema de gerenciamento de conteúdo para portfólios com editor visual.',
-      tech: ['Next.js', 'Prisma', 'TailwindCSS'],
-      image: '📝',
-      link: '#'
-    },
-    {
-      id: 6,
-      title: 'Fitness Tracker',
-      description: 'Aplicativo de rastreamento de exercícios com gráficos de progresso e metas.',
-      tech: ['React Native', 'Node.js', 'MongoDB'],
-      image: '💪',
-      link: '#'
-    }
-  ];
+  const released = PROJECTS.length;
+  const inStudio = Math.max(TRACKLIST_SIZE - released, 0);
 
   return (
-    <section id="projects" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Meus Projetos</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 h-48 flex items-center justify-center text-6xl">
-                {project.image}
+    <section id="faixas" className="section">
+      <div className="wrap">
+        <header className="section-head">
+          <div>
+            <p className="label">Lado A · Faixas</p>
+            <h2 className="display">Projetos</h2>
+          </div>
+          <p className="label">
+            {released} {released === 1 ? "lançada" : "lançadas"} · {inStudio} em estúdio
+          </p>
+        </header>
+
+        <ol className="tracks">
+          {PROJECTS.map((project, i) => (
+            <li key={project.title} className="track">
+              <span className="track__n">{pad(i + 1)}</span>
+              <div>
+                <h3 className="track__title">{project.title}</h3>
+                <p className="track__desc">{project.description}</p>
+                <p className="label track__stack">{project.stack.join(" · ")}</p>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <a
-                  href={project.link}
-                  className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-                >
-                  Ver Projeto
-                </a>
+              <div style={{ display: "flex", gap: "1.25rem" }}>
+                {project.href && (
+                  <a className="track__link" href={project.href} target="_blank" rel="noopener noreferrer">
+                    Ver site <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
+                )}
+                {project.repo && (
+                  <a className="track__link" href={project.repo} target="_blank" rel="noopener noreferrer">
+                    Código <ArrowUpRight size={14} aria-hidden="true" />
+                  </a>
+                )}
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+
+          {Array.from({ length: inStudio }, (_, i) => (
+            <li key={`soon-${i}`} className="track track--soon">
+              <span className="track__n">{pad(released + i + 1)}</span>
+              <div>
+                <h3 className="track__title">Faixa em gravação</h3>
+              </div>
+              {i === 0 ? <span className="rec">Gravando</span> : <span className="label">Em breve</span>}
+            </li>
+          ))}
+        </ol>
+
+        <p className="tracks__note">
+          As primeiras faixas saem em breve. Enquanto isso, os rascunhos ficam no{" "}
+          <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
+            meu GitHub
+          </a>
+          .
+        </p>
       </div>
     </section>
   );
