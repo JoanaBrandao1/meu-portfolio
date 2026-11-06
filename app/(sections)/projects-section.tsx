@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import { Neon } from "@/components/neon";
+import { Sparkle } from "@/components/sparkle";
 import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -9,11 +11,17 @@ export default function ProjectsSection() {
 
   return (
     <section id="faixas" className="section">
+      <Neon kind="coqueiro" style={{ left: "0.5rem", bottom: "1.5rem", width: "9rem" }} />
+      <Sparkle className="flash flash--lime" style={{ top: "4rem", left: "3%", width: "1.8rem" }} />
+      <Sparkle className="flash flash--pink" style={{ top: "5rem", right: "5%", width: "2.6rem" }} />
       <div className="wrap">
         <header className="section-head">
           <div>
             <p className="label">Lado A · Faixas</p>
-            <h2 className="display">Projetos</h2>
+            <h2 className="display">
+              Projetos
+              <Sparkle className="flash-inline flash--pink" />
+            </h2>
           </div>
           <p className="label">
             {released} {released === 1 ? "lançada" : "lançadas"} · {inStudio} em estúdio

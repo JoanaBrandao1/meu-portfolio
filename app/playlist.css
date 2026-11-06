@@ -92,7 +92,15 @@ body::before {
 
 .section {
   position: relative;
+  overflow-x: clip;
   padding: clamp(4.5rem, 10vw, 8rem) 0;
+}
+
+/* o conteúdo fica na frente dos letreiros de neon */
+.section > .wrap,
+.np > .wrap {
+  position: relative;
+  z-index: 1;
 }
 
 /* fileira de strass separando as seções */
@@ -283,6 +291,7 @@ body::before {
 /* ---------- hero: tocando agora ---------- */
 
 .np {
+  position: relative;
   overflow-x: clip;
   min-height: 100svh;
   display: flex;
@@ -290,7 +299,8 @@ body::before {
   padding: 7rem 0 4rem;
 }
 
-.np__text {
+.np__text,
+.np__art {
   position: relative;
 }
 
@@ -629,10 +639,117 @@ body::before {
   }
 }
 
+/* ---------- letreiros de neon ---------- */
+
+.neon {
+  position: absolute;
+  z-index: 0;
+  height: auto;
+  pointer-events: none;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  --neon-amber: #ffb23f;
+  --neon-lime: #c8f03c;
+  --neon-pink: #ff4f93;
+  --neon-core: #fff4dc;
+}
+
+/* no claro o brilho aparece menos, então o tubo fica mais forte */
+:root:not(.dark) .neon {
+  --neon-amber: #ea8a1c;
+  --neon-lime: #93b81a;
+  --neon-pink: #e5407e;
+  --neon-core: #fff2d6;
+  opacity: 0.85;
+}
+
+.neon__tube {
+  stroke-width: 3.4;
+}
+
+.neon__amber { stroke: var(--neon-amber); }
+.neon__lime { stroke: var(--neon-lime); }
+.neon__pink { stroke: var(--neon-pink); }
+
+.neon__core {
+  fill: none;
+  stroke: var(--neon-core);
+  stroke-width: 1.1;
+  opacity: 0.85;
+}
+
+.neon__bulb {
+  fill: #ffe6b0;
+  stroke: var(--neon-amber);
+  stroke-width: 1.4;
+}
+
+.neon--flicker {
+  animation: flicker 7s linear infinite;
+}
+
+@keyframes flicker {
+  0%, 18%, 20.5%, 22%, 61%, 62.5%, 100% { opacity: 1; }
+  19%, 21.5%, 62% { opacity: 0.35; }
+}
+
+@media (max-width: 860px) {
+  .neon {
+    opacity: 0.3 !important;
+  }
+}
+
+/* ---------- brilhos (estrela de flash) ---------- */
+
+.flash {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+  pointer-events: none;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.flash-inline {
+  display: inline-block;
+  width: 0.32em;
+  height: 0.32em;
+  margin-left: 0.08em;
+  vertical-align: top;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.flash--pink {
+  color: #ff4f93;
+  filter: drop-shadow(0 0 6px rgb(255 79 147 / 0.6));
+}
+
+.flash--lime {
+  color: var(--lime);
+  filter: drop-shadow(0 0 6px rgb(200 240 60 / 0.7));
+  animation-delay: -0.9s;
+}
+
+.flash--white {
+  color: #fff;
+  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 2px #e07b8d);
+  animation-delay: -1.7s;
+}
+
+/* no fundo nude, as estrelas claras precisam de contorno */
+:root:not(.dark) .flash--white {
+  filter: drop-shadow(0 0 1px #b73d53) drop-shadow(0 0 4px #e07b8d);
+}
+
+:root:not(.dark) .flash--lime {
+  filter: drop-shadow(0 0 1px #6f8a10) drop-shadow(0 0 5px rgb(150 190 20 / 0.7));
+}
+
 /* ---------- faixa de oncinha ---------- */
 
 .band {
-  overflow: hidden;
+  position: relative;
+  overflow: clip visible;
   background: var(--oncinha) center / 200px;
   border-block: 2px solid #2b1d14;
   padding: 0.7rem 0;
@@ -667,6 +784,23 @@ body::before {
 .band__item .sparkle {
   color: #ffd9e1;
   filter: drop-shadow(0 0 1px #2b1d14) drop-shadow(0 0 1px #2b1d14);
+}
+
+/* strass na borda de cima da faixa (a de baixo vem da seção seguinte) */
+.band::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -7px;
+  height: 12px;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 42% 38%, #fff 0 1.1px, transparent 1.6px),
+    radial-gradient(circle, #fbfcfe 0 1.8px, #c9d0d9 2.6px 3.6px, #737d89 4.2px 4.7px, transparent 5.1px);
+  background-size: 14px 12px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
 }
 
 @keyframes band {
@@ -924,7 +1058,10 @@ a.track:hover .track__title,
   .eq i,
   .rec::before,
   .cover .sparkle,
-  .band__track {
+  .band__track,
+  .flash,
+  .flash-inline,
+  .neon--flicker {
     animation: none;
   }
 }

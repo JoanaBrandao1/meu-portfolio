@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { Sparkle } from "@/components/sparkle";
+import { Neon } from "@/components/neon";
 
 const DURATION = 197; // 3:17, a "duração" da faixa de abertura
 const SEGMENTS = 18; // quadradinhos da barra no visor
@@ -35,8 +36,16 @@ export default function HeroSection() {
 
   return (
     <section id="inicio" className="np" data-playing={playing}>
+      <Neon
+        kind="estrela"
+        className="neon--flicker"
+        style={{ left: "-0.5rem", bottom: "1rem", width: "11rem", rotate: "-10deg" }}
+      />
+
       <div className="wrap np__grid">
         <div className="np__text">
+          <Sparkle className="flash flash--white" style={{ top: "1.6rem", left: "21rem", width: "1.5rem" }} />
+          <Sparkle className="flash flash--lime" style={{ bottom: "1.2rem", right: "6%", width: "2rem" }} />
           <p className="label np__now">
             <span className="eq" aria-hidden="true">
               <i />
@@ -94,6 +103,7 @@ export default function HeroSection() {
             </div>
           </div>
 
+          <Sparkle className="flash flash--pink" style={{ bottom: "-1.6rem", left: "-1.8rem", width: "2.2rem" }} />
           <div className="discman">
             <button
               type="button"

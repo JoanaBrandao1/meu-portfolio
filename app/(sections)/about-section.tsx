@@ -1,5 +1,8 @@
 
 
+import { Neon } from "@/components/neon";
+import { Sparkle } from "@/components/sparkle";
+
 // Este texto é um rascunho. Reescreva com as suas palavras: é o que mais deixa o site com a sua cara.
 
 const credits = [
@@ -12,11 +15,17 @@ const credits = [
 export default function AboutSection() {
   return (
     <section id="sobre" className="section">
+      <Neon kind="cifrao" className="neon--flicker" style={{ right: "3%", bottom: "3rem", width: "7rem", rotate: "8deg" }} />
+      <Sparkle className="flash flash--pink" style={{ top: "3.5rem", right: "7%", width: "2.4rem" }} />
+      <Sparkle className="flash flash--white" style={{ top: "6.5rem", right: "12%", width: "1.2rem" }} />
       <div className="wrap">
         <header className="section-head">
           <div>
             <p className="label">Lado A · Encarte</p>
-            <h2 className="display">Sobre mim</h2>
+            <h2 className="display">
+              Sobre mim
+              <Sparkle className="flash-inline flash--lime" />
+            </h2>
           </div>
         </header>
 
