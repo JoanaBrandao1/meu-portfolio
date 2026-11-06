@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { Sparkle } from "@/components/sparkle";
-import { Sticker } from "@/components/sticker";
 
 const DURATION = 197; // 3:17, a "duração" da faixa de abertura
 const SEGMENTS = 18; // quadradinhos da barra no visor
@@ -38,12 +37,6 @@ export default function HeroSection() {
     <section id="inicio" className="np" data-playing={playing}>
       <div className="wrap np__grid">
         <div className="np__text">
-          <Sticker
-            kind="butterfly"
-            tone="lilac"
-            className="sticker--float"
-            style={{ top: "-2.75rem", right: "8%", width: "4.75rem", rotate: "12deg" }}
-          />
           <p className="label np__now">
             <span className="eq" aria-hidden="true">
               <i />
@@ -84,10 +77,6 @@ export default function HeroSection() {
             <Sparkle className="sparkle--a" />
             <Sparkle className="sparkle--b" />
             <Sparkle className="sparkle--c" />
-            <Sticker
-              kind="heart"
-              style={{ left: "-7%", bottom: "16%", width: "3.4rem", rotate: "-14deg" }}
-            />
             <div className="sleeve">
               <div className="sleeve__title">
                 <span>{SITE.name}</span>

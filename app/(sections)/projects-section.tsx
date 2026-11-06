@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
-import { Sticker } from "@/components/sticker";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -10,11 +9,6 @@ export default function ProjectsSection() {
 
   return (
     <section id="faixas" className="section">
-      <div className="deco" aria-hidden="true">
-        <Sticker kind="star" tone="gold" style={{ top: "3.5rem", right: "9%", width: "3.6rem", rotate: "10deg" }} />
-        <Sticker kind="butterfly" className="sticker--float" style={{ top: "7.5rem", right: "2.5%", width: "3.4rem", rotate: "-16deg" }} />
-        <Sticker kind="daisy" tone="lilac" style={{ bottom: "2.5rem", right: "6%", width: "2.6rem" }} />
-      </div>
       <div className="wrap">
         <header className="section-head">
           <div>

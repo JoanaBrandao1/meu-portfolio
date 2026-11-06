@@ -49,7 +49,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #f5f9f9;
+  --background: #f4ebe4;
   --foreground: #2b1621;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -87,8 +87,8 @@
 }
 
 .dark {
-  /* ameixa quase preta: combina com o rosa e a oncinha */
-  --background: #1c1016;
+  /* ameixa quase preta, com oncinha tom sobre tom por cima (app/playlist.css) */
+  --background: #170c12;
   --foreground: #fcedf1;
   --card: #2a1820;
   --card-foreground: #fcedf1;

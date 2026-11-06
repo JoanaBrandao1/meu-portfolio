@@ -1,5 +1,5 @@
 # Uso: python3 scripts/oncinha.py public/patterns
-# Troque as cores nas duas últimas linhas para mudar a estampa.
+# Troque as cores no fim do arquivo para mudar as estampas.
 # Gera uma estampa de oncinha que se repete sem emenda (tile 160x160).
 import math, random, sys
 
@@ -80,3 +80,21 @@ def make(bg, mid, dark, seed=7, W=220):
 out = sys.argv[1]
 open(f"{out}/oncinha.svg", "w").write(make("#d9a25f", "#b97a3a", "#2b1d14"))
 open(f"{out}/oncinha-rosa.svg", "w").write(make("#e07b8d", "#d46479", "#a8384d", seed=11))
+# tom sobre tom, para o fundo da página
+open(f"{out}/oncinha-nude.svg", "w").write(make("#f4ebe4", "#f1e6de", "#ebddd2", seed=23))
+open(f"{out}/oncinha-noite.svg", "w").write(make("#170c12", "#1e1018", "#2a1620", seed=23))
+
+
+def glitter(W=140, seed=5):
+    # pontinhos de brilho para misturar no cromado
+    rnd = random.Random(seed)
+    dots = []
+    for _ in range(90):
+        x, y = rnd.uniform(0, W), rnd.uniform(0, W)
+        r = rnd.choice([0.5, 0.6, 0.8, 1, 1.3])
+        o = rnd.uniform(0.35, 1)
+        dots.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="#fff" opacity="{o:.2f}"/>')
+    return f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{W}" viewBox="0 0 {W} {W}">{"".join(dots)}</svg>'
+
+
+open(f"{out}/glitter.svg", "w").write(glitter())

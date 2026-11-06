@@ -20,8 +20,12 @@
   /* estampas (geradas em public/patterns) */
   --oncinha: url("/patterns/oncinha.svg");
   --oncinha-rosa: url("/patterns/oncinha-rosa.svg");
-  --simbolos: url("/patterns/simbolos.svg");
-  --simbolos-opacity: 0.42;
+  --fundo: url("/patterns/oncinha-nude.svg");
+  --glitter: url("/patterns/glitter.svg");
+
+  /* verde-limão neon, o segundo destaque depois do rosa */
+  --lime: #c8f03c;
+  --lime-ink: #1d2306;
 
   /* CD iridescente */
   --iridescent: conic-gradient(from 20deg, #e9ecf1, #ff9fb8, #8fd9f2, #ffe27a, #c4a3ff, #e9ecf1, #ffb0c4, #93ead8, #f5f6f8, #e9ecf1);
@@ -32,7 +36,7 @@
 
 .dark {
   --hot-text: var(--baby-pink);
-  --simbolos-opacity: 0.32;
+  --fundo: url("/patterns/oncinha-noite.svg");
 }
 
 html {
@@ -44,55 +48,19 @@ body {
   font-family: var(--font-body);
 }
 
-/* papel de parede com estrelinhas, corações, borboletas... (scripts/papel-de-parede.py) */
+/* oncinha tom sobre tom no fundo da página toda */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: var(--simbolos) 0 0 / 520px;
-  opacity: var(--simbolos-opacity);
-}
-
-/* ---------- adesivos ---------- */
-
-.section {
-  position: relative;
-}
-
-.sticker {
-  position: absolute;
-  z-index: 2;
-  height: auto;
-  filter: drop-shadow(0 3px 4px rgb(60 10 30 / 0.25));
-  pointer-events: none;
-}
-
-.sticker--float {
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes float {
-  50% { translate: 0 -6px; }
-}
-
-.deco {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: clip;
-}
-
-@media (max-width: 600px) {
-  .sticker {
-    scale: 0.7;
-  }
+  background: var(--fundo) 0 0 / 330px;
 }
 
 ::selection {
-  background: var(--hot);
-  color: #fff;
+  background: var(--lime);
+  color: var(--lime-ink);
 }
 
 /* ---------- peças reutilizáveis ---------- */
@@ -123,8 +91,25 @@ body::before {
 }
 
 .section {
+  position: relative;
   padding: clamp(4.5rem, 10vw, 8rem) 0;
-  border-top: 1px solid var(--line);
+}
+
+/* fileira de strass separando as seções */
+.section::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 42% 38%, #fff 0 1.1px, transparent 1.6px),
+    radial-gradient(circle, #fbfcfe 0 1.8px, #c9d0d9 2.6px 3.6px, #737d89 4.2px 4.7px, transparent 5.1px);
+  background-size: 14px 12px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
 }
 
 .section-head {
@@ -316,6 +301,10 @@ body::before {
   gap: clamp(2.5rem, 6vw, 5rem);
 }
 
+.dark .np__now {
+  color: var(--lime);
+}
+
 .np__now {
   display: inline-flex;
   align-items: center;
@@ -332,7 +321,9 @@ body::before {
 .chrome {
   font-style: normal;
   color: var(--hot);
-  background: linear-gradient(180deg, #fff3f6 0%, #ffc3d0 24%, #e07b8d 47%, #8f2b3f 50%, #e98a9c 60%, #ffd9e1 82%, #f2a0b0 100%);
+  background:
+    var(--glitter) 0 0 / 140px,
+    linear-gradient(180deg, #fff3f6 0%, #ffc3d0 24%, #e07b8d 47%, #8f2b3f 50%, #e98a9c 60%, #ffd9e1 82%, #f2a0b0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -370,8 +361,8 @@ body::before {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: #4caf7a;
-  box-shadow: 0 0 0 3px color-mix(in oklab, #4caf7a 25%, transparent);
+  background: var(--lime);
+  box-shadow: 0 0 0 1px #7d9a12, 0 0 10px var(--lime);
 }
 
 /* equalizador do "tocando agora" */
@@ -452,13 +443,14 @@ body::before {
 .cover .sparkle {
   position: absolute;
   z-index: 2;
-  color: var(--hot);
+  color: #ff4f93;
+  filter: drop-shadow(0 0 6px rgb(255 79 147 / 0.6));
   animation: twinkle 2.4s ease-in-out infinite;
 }
 
-.cover .sparkle--a { top: -6%; left: -7%; width: 2.6rem; height: 2.6rem; }
-.cover .sparkle--b { top: 8%; left: -12%; width: 1.1rem; height: 1.1rem; animation-delay: -0.8s; }
-.cover .sparkle--c { bottom: -7%; right: -24%; width: 1.9rem; height: 1.9rem; color: #f3c64f; animation-delay: -1.6s; }
+.cover .sparkle--a { top: -7%; left: -8%; width: 3.2rem; height: 3.2rem; }
+.cover .sparkle--b { top: 9%; left: -12%; width: 1.3rem; height: 1.3rem; color: #fff; animation-delay: -0.8s; filter: drop-shadow(0 0 4px #fff); }
+.cover .sparkle--c { bottom: -8%; right: -24%; width: 2.4rem; height: 2.4rem; color: var(--lime); animation-delay: -1.6s; filter: drop-shadow(0 0 6px rgb(200 240 60 / 0.7)); }
 
 @keyframes twinkle {
   0%, 100% { scale: 1; opacity: 1; }
@@ -517,8 +509,9 @@ body::before {
   bottom: 0.9rem;
   z-index: 1;
   padding: 0.4rem 0.65rem;
-  background: #fff6c9;
-  color: #2b1621;
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-weight: 500;
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
   font-family: var(--font-label);
   font-size: 0.65rem;
@@ -575,9 +568,9 @@ body::before {
   min-width: 0;
   padding: 0.45rem 0.75rem 0.5rem;
   border-radius: 0.6rem;
-  background: linear-gradient(180deg, #b9d4c0, #cfe4d2);
-  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.25);
-  color: #1f3a2a;
+  background: linear-gradient(180deg, #b9e02c, #d4f55a);
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.3), 0 0 14px -4px var(--lime);
+  color: var(--lime-ink);
   font-family: var(--font-lcd);
   font-size: 1.2rem;
   line-height: 1.15;
@@ -606,11 +599,11 @@ body::before {
 
 .lcd__bar i {
   flex: 1;
-  background: rgb(31 58 42 / 0.15);
+  background: rgb(29 35 6 / 0.15);
 }
 
 .lcd__bar i[data-on="true"] {
-  background: #1f3a2a;
+  background: var(--lime-ink);
 }
 
 @media (max-width: 420px) {
@@ -718,7 +711,6 @@ body::before {
 }
 
 .credits {
-  border-top: 1.5px solid var(--ink);
 }
 
 .credits div {
@@ -752,7 +744,6 @@ body::before {
 
 .tracks {
   list-style: none;
-  border-top: 1.5px solid var(--ink);
 }
 
 .track {
@@ -911,7 +902,7 @@ a.track:hover .track__title,
 /* ---------- rodapé ---------- */
 
 .footer {
-  border-top: 1px solid var(--line);
+  position: relative;
   padding: 1.5rem 0 2rem;
 }
 
@@ -933,8 +924,7 @@ a.track:hover .track__title,
   .eq i,
   .rec::before,
   .cover .sparkle,
-  .band__track,
-  .sticker--float {
+  .band__track {
     animation: none;
   }
 }
