@@ -918,6 +918,10 @@ body::before {
 
 .about__title {
   position: relative;
+  /* quanto o "Sobre mim" estica na horizontal; a borboleta usa o mesmo valor para pousar no fim */
+  --title-stretch: 1.35;
+  --butterfly-x: calc(100% * var(--title-stretch));
+  --butterfly-y: 0.5rem;
 }
 
 .notes__text p {
@@ -1202,7 +1206,27 @@ body::before {
   margin-top: 0.75rem;
   padding: 0.1em 0 0.15em;
   rotate: -3deg;
+  scale: var(--title-stretch, 1) 1; /* estica as letras na horizontal */
   transform-origin: left center;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 600px) {
+  .wavy {
+    font-size: 2.6rem;
+  }
+
+  /* no celular o título ocupa a largura toda, então a borboleta pousa em cima do fim dele */
+  .about__title {
+    --title-stretch: 1.15;
+    --butterfly-x: calc(100% - 3rem);
+    --butterfly-y: -1.5rem;
+  }
+}
+
+/* "Sobre mim" mais perto do texto de baixo */
+.section-head--tight {
+  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .wavy__word {

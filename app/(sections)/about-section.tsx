@@ -24,7 +24,7 @@ export default function AboutSection() {
       <Butterfly tone="lime" className="deco--float deco--desktop" style={{ bottom: "4.5rem", left: "46%", width: "3.6rem", rotate: "18deg" }} />
       <HeartSticker className="deco--desktop" style={{ bottom: "3rem", left: "24%", width: "5rem", rotate: "-12deg" }} />
 
-      <Gem tone="pink" size="1.1rem" style={{ top: "11rem", right: "30%" }} />
+      <Gem tone="pink" size="1.1rem" className="deco--desktop" style={{ top: "11rem", right: "30%" }} />
       <Gem tone="clear" size="0.85rem" style={{ top: "3rem", left: "42%" }} />
       <Gem tone="clear" size="1.2rem" className="deco--desktop" style={{ top: "16rem", right: "3.5%" }} />
       <Gem tone="lime" size="0.9rem" className="deco--desktop" style={{ bottom: "10rem", right: "24%" }} />
@@ -37,15 +37,15 @@ export default function AboutSection() {
       <Sparkle className="flash flash--pink deco--desktop" style={{ bottom: "13rem", right: "6%", width: "1.6rem" }} />
 
       <div className="wrap">
-        <header className="section-head">
+        <header className="section-head section-head--tight">
           <div className="about__title">
             <p className="label">Lado A · Encarte</p>
             <WavyTitle text="Sobre mim" />
-            {/* pousada no fim do título, então acompanha o tamanho dele em qualquer tela */}
+            {/* pousada no fim do título; a posição acompanha o esticamento (--title-stretch em playlist.css) */}
             <Butterfly
               tone="pink"
               className="deco--float"
-              style={{ left: "100%", top: "0.5rem", marginLeft: "0.5rem", width: "clamp(2.6rem, 6vw, 4.4rem)", rotate: "-14deg" }}
+              style={{ left: "var(--butterfly-x)", top: "var(--butterfly-y)", marginLeft: "0.5rem", width: "clamp(2.6rem, 6vw, 4.4rem)", rotate: "-14deg" }}
             />
           </div>
         </header>
