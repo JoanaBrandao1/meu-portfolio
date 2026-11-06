@@ -1,9 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
+import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
 import { Neon } from "@/components/neon";
 import { Sparkle } from "@/components/sparkle";
-import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
-
-const pad = (n: number) => String(n).padStart(2, "0");
+import { CoverCarousel } from "@/components/cover-carousel";
+import { Pompom, PompomFilter } from "@/components/pompom";
 
 export default function ProjectsSection() {
   const released = PROJECTS.length;
@@ -11,9 +10,17 @@ export default function ProjectsSection() {
 
   return (
     <section id="faixas" className="section">
+      <PompomFilter />
       <Neon kind="coqueiro" style={{ left: "-2.5rem", bottom: "0.5rem", width: "13rem" }} />
       <Sparkle className="flash flash--lime" style={{ top: "4rem", left: "3%", width: "1.8rem" }} />
       <Sparkle className="flash flash--pink" style={{ top: "5rem", right: "5%", width: "2.6rem" }} />
+
+      {/* pompons */}
+      <Pompom size="6.5rem" style={{ top: "2.5rem", right: "13%" }} />
+      <Pompom size="4rem" style={{ top: "6.5rem", right: "9%" }} />
+      <Pompom size="4.5rem" chain style={{ top: "0", left: "8%" }} />
+      <Pompom size="5.5rem" className="pompom--desktop" style={{ bottom: "3rem", right: "4%" }} />
+
       <div className="wrap">
         <header className="section-head">
           <div>
@@ -28,40 +35,7 @@ export default function ProjectsSection() {
           </p>
         </header>
 
-        <ol className="tracks">
-          {PROJECTS.map((project, i) => (
-            <li key={project.title} className="track">
-              <span className="track__n">{pad(i + 1)}</span>
-              <div>
-                <h3 className="track__title">{project.title}</h3>
-                <p className="track__desc">{project.description}</p>
-                <p className="label track__stack">{project.stack.join(" · ")}</p>
-              </div>
-              <div style={{ display: "flex", gap: "1.25rem" }}>
-                {project.href && (
-                  <a className="track__link" href={project.href} target="_blank" rel="noopener noreferrer">
-                    Ver site <ArrowUpRight size={14} aria-hidden="true" />
-                  </a>
-                )}
-                {project.repo && (
-                  <a className="track__link" href={project.repo} target="_blank" rel="noopener noreferrer">
-                    Código <ArrowUpRight size={14} aria-hidden="true" />
-                  </a>
-                )}
-              </div>
-            </li>
-          ))}
-
-          {Array.from({ length: inStudio }, (_, i) => (
-            <li key={`soon-${i}`} className="track track--soon">
-              <span className="track__n">{pad(released + i + 1)}</span>
-              <div>
-                <h3 className="track__title">Faixa em gravação</h3>
-              </div>
-              {i === 0 ? <span className="rec">Gravando</span> : <span className="label">Em breve</span>}
-            </li>
-          ))}
-        </ol>
+        <CoverCarousel projects={PROJECTS} total={TRACKLIST_SIZE} />
 
         <p className="tracks__note">
           As primeiras faixas saem em breve. Enquanto isso, os rascunhos ficam no{" "}

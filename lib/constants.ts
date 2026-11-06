@@ -21,9 +21,13 @@ export type Project = {
   href?: string;
   /** link do repositório (opcional) */
   repo?: string;
+  /** logo do projeto, aparece no meio da capa (ex.: "/projetos/meu-app-logo.png") */
+  logo?: string;
+  /** imagem de fundo da capa, se quiser uma arte própria (opcional) */
+  cover?: string;
 };
 
-// Quando terminar um projeto, adicione aqui. Ele vira uma "faixa" na seção de projetos.
+// Quando terminar um projeto, adicione aqui. Ele vira uma capa no carrossel da seção de projetos.
 // Exemplo:
 // {
 //   title: "Nome do projeto",
@@ -31,8 +35,9 @@ export type Project = {
 //   stack: ["Next.js", "TypeScript"],
 //   href: "https://...",
 //   repo: "https://github.com/JoanaBrandao1/...",
+//   logo: "/projetos/nome-do-projeto.png",
 // },
 export const PROJECTS: Project[] = [];
 
-// Quantas faixas aparecem no total. As que ainda não têm projeto aparecem como "em gravação".
+// Quantas capas aparecem no total. As que ainda não têm projeto aparecem como "em gravação".
 export const TRACKLIST_SIZE = 4;
