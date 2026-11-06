@@ -910,14 +910,19 @@ body::before {
 
 .notes__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: clamp(2.5rem, 6vw, 6rem);
+  /* o texto ocupa todo o espaço que sobra e a contracapa fica logo ao lado */
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+.about__title {
+  position: relative;
 }
 
 .notes__text p {
   font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   line-height: 1.45;
-  max-width: 36rem;
 }
 
 .notes__text p + p {
@@ -949,52 +954,242 @@ body::before {
   line-height: 1.5;
 }
 
-/* card da ficha técnica com moldura de pelúcia de oncinha */
-.fur-card {
+/* contracapa do álbum: lombada de oncinha rosa + ficha técnica no verso */
+.backcover {
   position: relative;
-  align-self: start;
-  margin: 0.75rem;
-  isolation: isolate;
-}
-
-.fur-card__fur {
-  position: absolute;
-  inset: -16px;
-  z-index: -1;
-  border-radius: 26px;
-  background: var(--oncinha) center / 150px;
-  filter: url(#pelo) drop-shadow(0 10px 16px rgb(0 0 0 / 0.35));
-}
-
-.fur-card__inner {
-  position: relative;
-  padding: 1.4rem 1.5rem 0.6rem;
-  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr);
+  margin-top: 0.5rem;
+  rotate: 1.5deg;
+  border: 2px solid #2b1d14;
+  border-radius: 6px;
   background: var(--card);
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06), 0 0 0 3px rgb(43 29 20 / 0.35);
+  /* a borda clara em volta lembra o plástico do estojo de CD */
+  box-shadow:
+    0 0 0 5px color-mix(in oklab, var(--foreground) 10%, transparent),
+    0 22px 34px -18px rgb(0 0 0 / 0.6);
 }
 
-.fur-card__title {
+.backcover__spine {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: var(--oncinha-rosa) center / 130px;
+  border-right: 2px solid #2b1d14;
+}
+
+/* strass na emenda entre a lombada e o verso */
+.backcover__spine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -8px;
+  width: 12px;
+  background:
+    radial-gradient(circle at 42% 38%, #fff 0 1.1px, transparent 1.6px),
+    radial-gradient(circle, #fbfcfe 0 1.8px, #c9d0d9 2.6px 3.6px, #737d89 4.2px 4.7px, transparent 5.1px);
+  background-size: 12px 14px;
+  background-repeat: repeat-y;
+  filter: drop-shadow(1px 0 1px rgb(0 0 0 / 0.25));
+}
+
+.backcover__spine span {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  font-stretch: 75%;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-text-stroke: 5px #2b1d14;
+  paint-order: stroke fill;
+}
+
+.backcover__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.3rem 1.3rem 1.1rem 1.6rem;
+}
+
+.backcover__title {
   color: var(--hot-text);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
 }
 
-/* dentro do card, a lista não precisa da fita de oncinha */
-.fur-card .credits {
+/* aqui a lista não precisa da fita de oncinha, e o rótulo fica em cima do valor */
+.backcover .credits {
   padding-top: 0;
 }
 
-.fur-card .credits::before {
+.backcover .credits::before {
   display: none;
 }
 
-.fur-card .credits div:last-child {
+.backcover .credits div {
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0.7rem 0;
+}
+
+.backcover .credits div:last-child {
   border-bottom: 0;
+}
+
+.backcover__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+
+.backcover__sticker {
+  rotate: -4deg;
+  padding: 0.35rem 0.5rem;
+  border: 1.5px solid var(--lime-ink);
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* código de barras em etiqueta branca */
+.backcover__barcode {
+  flex: none;
+  width: 5.6rem;
+  height: 2.6rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px, #111 12px 13px, transparent 13px 16px) content-box,
+    #fff;
 }
 
 @media (max-width: 860px) {
   .notes__grid {
     grid-template-columns: 1fr;
+  }
+
+  .backcover {
+    max-width: 24rem;
+  }
+}
+
+/* ---------- sobre: peças de fundo ---------- */
+
+.butterfly,
+.heart-sticker {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.butterfly {
+  aspect-ratio: 1;
+  filter: drop-shadow(0 0 1px #8a0c4b) drop-shadow(0 5px 6px rgb(0 0 0 / 0.35));
+}
+
+.butterfly__fill,
+.heart-sticker__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* a forma vem da máscara; o preenchimento é glitter sobre um degradê cromado */
+.butterfly__fill {
+  -webkit-mask: url("/patterns/borboleta.svg") center / contain no-repeat;
+  mask: url("/patterns/borboleta.svg") center / contain no-repeat;
+  background:
+    var(--glitter) 0 0 / 90px,
+    linear-gradient(135deg, #ffe3f1 0%, #ff8cc6 30%, #ff3d9e 55%, #b80f63 70%, #ff5fb0 100%);
+}
+
+.butterfly--lime {
+  filter: drop-shadow(0 0 1px #3d5206) drop-shadow(0 5px 6px rgb(0 0 0 / 0.35));
+}
+
+.butterfly--lime .butterfly__fill {
+  background:
+    var(--glitter) 0 0 / 90px,
+    linear-gradient(135deg, #f6ffd0 0%, #d9f76a 35%, #9bc41c 62%, #5b7a08 78%, #c8f03c 100%);
+}
+
+/* adesivo: coração de oncinha com a borda branca recortada */
+.heart-sticker {
+  aspect-ratio: 100 / 92;
+  filter:
+    drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(0 7px 8px rgb(0 0 0 / 0.35));
+}
+
+.heart-sticker__fill {
+  -webkit-mask: url("/patterns/coracao.svg") center / contain no-repeat;
+  mask: url("/patterns/coracao.svg") center / contain no-repeat;
+  background: var(--oncinha) center / 90px;
+}
+
+/* pedras de strass soltas */
+.gem {
+  position: absolute;
+  z-index: 0;
+  width: var(--s, 1rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.4));
+}
+
+.gem--clear {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #fbfcfe 0 28%, #c9d0d9 58%, #737d89 84%, transparent 86%);
+}
+
+.gem--pink {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #ffc2e2 0 26%, #ff3d9e 58%, #8a0c4b 84%, transparent 86%);
+}
+
+.gem--lime {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #f6ffd0 0 26%, #c8f03c 58%, #5b7a08 84%, transparent 86%);
+}
+
+/* CD de enfeite: o visual vem do .cd, aqui ele fica solto e gira bem devagar */
+.disc {
+  top: auto;
+  right: auto;
+  z-index: 0;
+  animation-duration: 40s;
+  pointer-events: none;
+}
+
+.deco--float {
+  animation: drift 5s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -0.7rem; }
+}
+
+@media (max-width: 860px) {
+  .deco--desktop {
+    display: none;
   }
 }
 
@@ -1025,7 +1220,11 @@ body::before {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.7)) drop-shadow(0 3px 0 #8a0c4b);
-  padding: 0 0.02em;
+  /* o degradê só pinta dentro da caixa da letra, e a fonte é inclinada: a bolinha do "i" e os pés
+     das letras passam dos lados da caixa. O espaço extra (compensado pela margem negativa)
+     aumenta a área pintada sem mudar o espaçamento entre as letras (0.02em de cada lado, como antes) */
+  padding: 0.35em 0.2em 0.15em;
+  margin: -0.35em -0.18em -0.15em;
 }
 
 .wavy__star {
@@ -1481,6 +1680,7 @@ body::before {
   .flash-inline,
   .neon--flicker,
   .pompom--chain,
+  .deco--float,
   .cover-card[data-active="true"] .cover-card__cd,
   .open-sign__dot,
   .open-sign__script,

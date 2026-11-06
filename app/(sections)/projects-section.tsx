@@ -15,10 +15,10 @@ export default function ProjectsSection() {
       <Sparkle className="flash flash--pink" style={{ top: "5rem", right: "5%", width: "2.6rem" }} />
 
       {/* pompons */}
-      <Pompom size="7.5rem" style={{ top: "2rem", right: "12%", rotate: "-12deg" }} />
-      <Pompom size="4.5rem" style={{ top: "7rem", right: "7.5%", rotate: "20deg" }} />
-      <Pompom size="5rem" shape="coracao" chain style={{ top: "0", left: "8%" }} />
-      <Pompom size="6.5rem" shape="coracao" className="pompom--desktop" style={{ bottom: "3rem", right: "4%", rotate: "10deg" }} />
+      <Pompom size="11.5rem" style={{ top: "1rem", right: "13%", rotate: "-12deg" }} />
+      <Pompom size="7rem" style={{ top: "9rem", right: "5%", rotate: "20deg" }} />
+      <Pompom size="8rem" shape="coracao" chain style={{ top: "0", left: "8%" }} />
+      <Pompom size="10rem" shape="coracao" className="pompom--desktop" style={{ bottom: "3rem", right: "3%", rotate: "10deg" }} />
 
       <div className="wrap">
         <header className="section-head">

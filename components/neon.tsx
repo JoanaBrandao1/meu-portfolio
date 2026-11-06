@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 
-// Letreiros de neon para o fundo: cifrão, coqueiro e estrela de lâmpadas.
+// Letreiros de neon para o fundo: cifrão, coqueiro, coração e estrela de lâmpadas.
 // São só decoração (aria-hidden) e ficam atrás do conteúdo.
 
-type Kind = "cifrao" | "coqueiro" | "estrela";
+type Kind = "cifrao" | "coqueiro" | "coracao" | "estrela";
 
 // pontos da estrela de lâmpadas, calculados uma vez
 const STAR = (() => {
@@ -101,6 +101,21 @@ export function Neon({
           {leaves.map((d) => (
             <Tube key={d} tone="lime" d={d} />
           ))}
+        </g>
+      </svg>
+    );
+  }
+
+  if (kind === "coracao") {
+    // coração de tubo rosa, com um coraçãozinho lima dentro
+    const outer = "M50 88C12 60 3 40 3 26C3 12 14 3 28 3C38 3 46 9 50 17C54 9 62 3 72 3C86 3 97 12 97 26C97 40 88 60 50 88Z";
+    const inner = "M50 66C30 50 26 40 26 32C26 25 31 21 37 21C43 21 48 24 50 29C52 24 57 21 63 21C69 21 74 25 74 32C74 40 70 50 50 66Z";
+    return (
+      <svg className={`neon ${className}`} viewBox="-8 -8 116 108" style={style} aria-hidden="true">
+        <defs>{glow}</defs>
+        <g filter="url(#neon-glow)">
+          <Tube tone="pink" d={outer} />
+          <Tube tone="lime" d={inner} />
         </g>
       </svg>
     );
