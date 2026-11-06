@@ -11,7 +11,7 @@ export default function ProjectsSection() {
 
   return (
     <section id="faixas" className="section">
-      <Neon kind="coqueiro" style={{ left: "0.5rem", bottom: "1.5rem", width: "9rem" }} />
+      <Neon kind="coqueiro" style={{ left: "-2.5rem", bottom: "0.5rem", width: "13rem" }} />
       <Sparkle className="flash flash--lime" style={{ top: "4rem", left: "3%", width: "1.8rem" }} />
       <Sparkle className="flash flash--pink" style={{ top: "5rem", right: "5%", width: "2.6rem" }} />
       <div className="wrap">

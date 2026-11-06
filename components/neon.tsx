@@ -27,7 +27,7 @@ const STAR = (() => {
 })();
 
 const glow = (
-  <filter id="neon-glow" x="-40%" y="-40%" width="180%" height="180%">
+  <filter id="neon-glow" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" x="-200" y="-200" width="600" height="600">
     <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="perto" />
     <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="longe" />
     <feMerge>
@@ -57,12 +57,23 @@ export function Neon({
   style?: CSSProperties;
 }) {
   if (kind === "cifrao") {
+    // cifrão de dinheiro: S com duas listras, tubo laranja e contorno verde
+    const S = "M46 24C46 14 38 10 30 10 20 10 13 16 13 25 13 35 22 38 30 41 39 44 47 48 47 58 47 69 39 74 30 74 20 74 12 68 12 58";
+    const bars = "M25 0V10M35 0V10M25 74V92M35 74V92";
     return (
-      <svg className={`neon ${className}`} viewBox="-10 -6 80 112" style={style} aria-hidden="true">
-        <defs>{glow}</defs>
+      <svg className={`neon ${className}`} viewBox="-14 -12 88 116" style={style} aria-hidden="true">
+        <defs>
+          {glow}
+          {/* recorta o meio de um traço grosso, sobrando só as duas bordas = contorno */}
+          <mask id="cifrao-contorno" maskUnits="userSpaceOnUse" x="-14" y="-12" width="88" height="116">
+            <rect x="-14" y="-12" width="88" height="116" fill="#fff" />
+            <path d={S + bars} fill="none" stroke="#000" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" />
+          </mask>
+        </defs>
         <g filter="url(#neon-glow)">
-          <Tube tone="amber" d="M44 24C44 15 37 12 30 12 21 12 15 17 15 25 15 34 23 37 30 40 38 43 46 47 46 57 46 67 38 72 30 72 21 72 14 67 14 58" />
-          <Tube tone="amber" d="M30 2V12M30 72V96" />
+          <path d={S + bars} className="neon__green-outline" mask="url(#cifrao-contorno)" />
+          <Tube tone="amber" d={S} />
+          <Tube tone="amber" d={bars} />
         </g>
       </svg>
     );

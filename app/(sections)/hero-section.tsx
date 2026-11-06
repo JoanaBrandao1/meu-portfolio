@@ -39,7 +39,7 @@ export default function HeroSection() {
       <Neon
         kind="estrela"
         className="neon--flicker"
-        style={{ left: "-0.5rem", bottom: "1rem", width: "11rem", rotate: "-10deg" }}
+        style={{ left: "-5rem", bottom: "-4.5rem", width: "18rem", rotate: "-10deg" }}
       />
 
       <div className="wrap np__grid">
@@ -77,7 +77,11 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <p className="label np__status">Disponível para novos projetos</p>
+          <p className="open-sign">
+            <span className="open-sign__dot" aria-hidden="true" />
+            <span className="open-sign__script">disponível</span>
+            <span className="open-sign__small">para novos projetos</span>
+          </p>
         </div>
 
         <div className="np__art">

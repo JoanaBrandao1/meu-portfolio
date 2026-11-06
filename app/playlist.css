@@ -359,20 +359,56 @@ body::before {
   margin-top: 2rem;
 }
 
-.np__status {
-  display: flex;
+/* plaquinha de neon "disponível" */
+.open-sign {
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-top: 1.75rem;
+  gap: 0.65rem;
+  margin-top: 1.9rem;
+  padding: 0.35rem 1.1rem 0.5rem 0.9rem;
+  border-radius: 0.9rem;
+  background: #1a0d13;
+  border: 1.5px solid rgb(200 240 60 / 0.35);
+  box-shadow:
+    inset 0 0 18px rgb(200 240 60 / 0.12),
+    0 8px 20px -12px rgb(0 0 0 / 0.7);
+  rotate: -2deg;
 }
 
-.np__status::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
+.open-sign__dot {
+  width: 0.55rem;
+  height: 0.55rem;
   border-radius: 50%;
   background: var(--lime);
-  box-shadow: 0 0 0 1px #7d9a12, 0 0 10px var(--lime);
+  box-shadow: 0 0 6px var(--lime), 0 0 14px var(--lime);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; box-shadow: 0 0 2px var(--lime); }
+}
+
+.open-sign__script {
+  font-family: var(--font-pacifico), "Brush Script MT", cursive;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  color: #efffc2;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 6px var(--lime),
+    0 0 14px var(--lime),
+    0 0 26px rgb(200 240 60 / 0.6);
+  animation: flicker 9s linear infinite;
+}
+
+.open-sign__small {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(200 240 60 / 0.85);
+  max-width: 7.5rem;
+  line-height: 1.35;
 }
 
 /* equalizador do "tocando agora" */
@@ -645,6 +681,7 @@ body::before {
   position: absolute;
   z-index: 0;
   height: auto;
+  overflow: visible; /* deixa o brilho passar da borda do desenho */
   pointer-events: none;
   fill: none;
   stroke-linecap: round;
@@ -652,6 +689,7 @@ body::before {
   --neon-amber: #ffb23f;
   --neon-lime: #c8f03c;
   --neon-pink: #ff4f93;
+  --neon-green: #4dff7c;
   --neon-core: #fff4dc;
 }
 
@@ -660,6 +698,7 @@ body::before {
   --neon-amber: #ea8a1c;
   --neon-lime: #93b81a;
   --neon-pink: #e5407e;
+  --neon-green: #1fbf52;
   --neon-core: #fff2d6;
   opacity: 0.85;
 }
@@ -671,6 +710,12 @@ body::before {
 .neon__amber { stroke: var(--neon-amber); }
 .neon__lime { stroke: var(--neon-lime); }
 .neon__pink { stroke: var(--neon-pink); }
+
+.neon__green-outline {
+  fill: none;
+  stroke: var(--neon-green);
+  stroke-width: 14;
+}
 
 .neon__core {
   fill: none;
@@ -868,10 +913,92 @@ body::before {
   line-height: 1.5;
 }
 
+/* card da ficha técnica com moldura de pelúcia de oncinha */
+.fur-card {
+  position: relative;
+  align-self: start;
+  margin: 0.75rem;
+  isolation: isolate;
+}
+
+.fur-card__fur {
+  position: absolute;
+  inset: -16px;
+  z-index: -1;
+  border-radius: 26px;
+  background: var(--oncinha) center / 150px;
+  filter: url(#pelo) drop-shadow(0 10px 16px rgb(0 0 0 / 0.35));
+}
+
+.fur-card__inner {
+  position: relative;
+  padding: 1.4rem 1.5rem 0.6rem;
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06), 0 0 0 3px rgb(43 29 20 / 0.35);
+}
+
+.fur-card__title {
+  color: var(--hot-text);
+  margin-bottom: 0.6rem;
+}
+
+/* dentro do card, a lista não precisa da fita de oncinha */
+.fur-card .credits {
+  padding-top: 0;
+}
+
+.fur-card .credits::before {
+  display: none;
+}
+
+.fur-card .credits div:last-child {
+  border-bottom: 0;
+}
+
 @media (max-width: 860px) {
   .notes__grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* título "Sobre mim" em onda, cromado rosa-choque */
+.wavy {
+  font-family: var(--font-shrikhand), var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 8.5vw, 6.5rem);
+  line-height: 1;
+  margin-top: 0.75rem;
+  padding: 0.1em 0 0.15em;
+  rotate: -3deg;
+  transform-origin: left center;
+}
+
+.wavy__word {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.wavy__char {
+  display: inline-block;
+  background:
+    var(--glitter) 0 0 / 120px,
+    linear-gradient(180deg, #ffe3f1 0%, #ff8cc6 26%, #ff3d9e 48%, #b80f63 52%, #ff5fb0 64%, #ffc2e2 88%, #ff7dbf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.7)) drop-shadow(0 3px 0 #8a0c4b);
+  padding: 0 0.02em;
+}
+
+.wavy__star {
+  width: 0.6em;
+  height: 0.6em;
+  margin: 0 0.06em 0 0.1em;
+  color: #ff3d9e;
+  filter: drop-shadow(0 0 6px rgb(255 61 158 / 0.7));
+  translate: 0 -0.1em;
 }
 
 /* ---------- projetos: faixas ---------- */
@@ -1061,7 +1188,9 @@ a.track:hover .track__title,
   .band__track,
   .flash,
   .flash-inline,
-  .neon--flicker {
+  .neon--flicker,
+  .open-sign__dot,
+  .open-sign__script {
     animation: none;
   }
 }

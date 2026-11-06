@@ -6,8 +6,8 @@ import { Sparkle } from "@/components/sparkle";
 export default function ContactSection() {
   return (
     <section id="contato" className="section">
-      <Neon kind="coqueiro" className="neon--flicker" style={{ right: "4%", bottom: "0", width: "11rem" }} />
-      <Neon kind="coqueiro" style={{ right: "15%", bottom: "0", width: "7.5rem", transform: "scaleX(-1)" }} />
+      <Neon kind="coqueiro" className="neon--flicker" style={{ right: "1.5%", bottom: "0", width: "16rem" }} />
+      <Neon kind="coqueiro" style={{ right: "15%", bottom: "0", width: "10.5rem", transform: "scaleX(-1)" }} />
       <Sparkle className="flash flash--white" style={{ top: "4rem", right: "11%", width: "1.6rem" }} />
       <Sparkle className="flash flash--pink" style={{ top: "7rem", right: "22%", width: "2.4rem" }} />
       <div className="wrap">
