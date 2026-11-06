@@ -19,10 +19,9 @@ export default function AboutSection() {
     <section id="sobre" className="section">
       {/* fundo: neon, CD, borboletas, adesivo de oncinha, strass e brilhos */}
       <Neon kind="cifrao" className="neon--flicker" style={{ right: "1.5%", bottom: "2rem", width: "10.5rem", rotate: "8deg" }} />
-      <Neon kind="coracao" className="neon--flicker deco--desktop" style={{ top: "9rem", right: "6%", width: "6rem", rotate: "10deg" }} />
-      <Disc className="deco--desktop" style={{ left: "-4.5rem", bottom: "1.5rem", width: "14rem" }} />
-      <Butterfly tone="lime" className="deco--float deco--desktop" style={{ bottom: "4.5rem", left: "46%", width: "3.6rem", rotate: "18deg" }} />
-      <HeartSticker className="deco--desktop" style={{ bottom: "3rem", left: "24%", width: "5rem", rotate: "-12deg" }} />
+      <Neon kind="coracao" className="neon--flicker deco--desktop" style={{ top: "6.5rem", right: "2.5%", width: "10rem", rotate: "10deg" }} />
+      <Disc className="deco--desktop" style={{ left: "-5rem", top: "3.5rem", width: "14rem" }} />
+      <HeartSticker className="deco--desktop" style={{ bottom: "2rem", left: "24%", width: "8.5rem", rotate: "-12deg" }} />
 
       <Gem tone="pink" size="1.1rem" className="deco--desktop" style={{ top: "11rem", right: "30%" }} />
       <Gem tone="clear" size="0.85rem" style={{ top: "3rem", left: "42%" }} />
