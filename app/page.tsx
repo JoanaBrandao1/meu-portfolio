@@ -3,12 +3,14 @@ import AboutSection from "./(sections)/about-section";
 import ProjectsSection from "./(sections)/projects-section";
 import ContactSection from "./(sections)/contact-section";
 import { SITE } from "@/lib/constants";
+import { Marquee } from "@/components/marquee";
 
 export default function Home() {
   return (
     <>
       <main>
         <HeroSection />
+        <Marquee />
         <AboutSection />
         <ProjectsSection />
         <ContactSection />

@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { Sparkle } from "@/components/sparkle";
 
 const DURATION = 197; // 3:17, a "duração" da faixa de abertura
+const SEGMENTS = 18; // quadradinhos da barra no visor
 
 function formatTime(seconds: number) {
   const m = Math.floor(seconds / 60);
@@ -47,7 +49,7 @@ export default function HeroSection() {
           <h1 className="display np__title">
             Joana
             <br />
-            <em>Brandão</em>
+            <em className="chrome">Brandão</em>
           </h1>
 
           <p className="np__lead">
@@ -71,7 +73,10 @@ export default function HeroSection() {
 
         <div className="np__art">
           <div className="cover">
-            <div className="record" aria-hidden="true" />
+            <div className="cd" aria-hidden="true" />
+            <Sparkle className="sparkle--a" />
+            <Sparkle className="sparkle--b" />
+            <Sparkle className="sparkle--c" />
             <div className="sleeve">
               <div className="sleeve__title">
                 <span>{SITE.name}</span>
@@ -89,34 +94,30 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div className="player">
+          <div className="discman">
             <button
               type="button"
-              className="player__btn"
+              className="discman__play"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? "Pausar" : "Tocar"}
             >
               {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
             </button>
 
-            <div className="player__meta">
-              <b>Olá, eu sou a Joana</b>
-              <span className="label">Faixa 00</span>
-            </div>
-
-            <div className="player__bar">
-              <span className="player__time">{formatTime(elapsed)}</span>
-              <div className="player__track">
-                <div
-                  className="player__fill"
-                  style={{
-                    width: `${(elapsed / DURATION) * 100}%`,
-                    // quando a faixa recomeça, a barra volta sem animar
-                    transition: elapsed === 0 ? "none" : undefined,
-                  }}
-                />
+            <div className="lcd" role="group" aria-label={`Faixa 00, ${formatTime(elapsed)} de ${formatTime(DURATION)}`}>
+              <div className="lcd__row">
+                <span>{playing ? "▶" : "❚❚"} 00</span>
+                <span className="lcd__title">Olá, eu sou a Joana</span>
               </div>
-              <span className="player__time">{formatTime(DURATION)}</span>
+              <div className="lcd__row">
+                <span>{formatTime(elapsed)}</span>
+                <span className="lcd__bar" aria-hidden="true">
+                  {Array.from({ length: SEGMENTS }, (_, i) => (
+                    <i key={i} data-on={i < Math.round((elapsed / DURATION) * SEGMENTS)} />
+                  ))}
+                </span>
+                <span>{formatTime(DURATION)}</span>
+              </div>
             </div>
           </div>
         </div>

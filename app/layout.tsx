@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, VT323 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/layout/navbar";
 import "./globals.css";
@@ -18,6 +18,13 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+// fonte de visor de LCD, para o Discman
+const lcd = VT323({
+  variable: "--font-lcd",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Joana Brandão · Desenvolvedora front-end",
   description:
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${archivo.variable} ${plexMono.variable}`}
+      className={`${archivo.variable} ${plexMono.variable} ${lcd.variable}`}
       suppressHydrationWarning
     >
       <body>

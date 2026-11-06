@@ -9,7 +9,7 @@ export default function ContactSection() {
         <h2 className="display requests__title">
           Tem uma ideia?
           <br />
-          <em>Manda pra mim.</em>
+          <em className="chrome">Manda pra mim.</em>
         </h2>
 
         <a className="requests__mail" href={`mailto:${SITE.email}`}>
