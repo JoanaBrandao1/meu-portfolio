@@ -1,9 +1,15 @@
 import { ArrowUpRight } from "lucide-react";
 import { SITE, SOCIAL_LINKS } from "@/lib/constants";
+import { Sticker } from "@/components/sticker";
 
 export default function ContactSection() {
   return (
     <section id="contato" className="section">
+      <div className="deco" aria-hidden="true">
+        <Sticker kind="butterfly" className="sticker--float" style={{ top: "4rem", right: "7%", width: "7rem", rotate: "8deg" }} />
+        <Sticker kind="heart" tone="lilac" style={{ top: "12.5rem", right: "21%", width: "2.4rem", rotate: "-10deg" }} />
+        <Sticker kind="star" tone="aqua" style={{ bottom: "3.5rem", right: "4%", width: "3rem", rotate: "-8deg" }} />
+      </div>
       <div className="wrap">
         <p className="label">Lado B · Pedidos</p>
         <h2 className="display requests__title">

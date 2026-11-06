@@ -1,3 +1,5 @@
+import { Sticker } from "@/components/sticker";
+
 // Este texto é um rascunho. Reescreva com as suas palavras: é o que mais deixa o site com a sua cara.
 
 const credits = [
@@ -10,6 +12,11 @@ const credits = [
 export default function AboutSection() {
   return (
     <section id="sobre" className="section">
+      <div className="deco" aria-hidden="true">
+        <Sticker kind="daisy" className="sticker--float" style={{ top: "4.5rem", right: "7%", width: "4.25rem" }} />
+        <Sticker kind="star" tone="gold" style={{ top: "10rem", right: "15%", width: "2.4rem", rotate: "14deg" }} />
+        <Sticker kind="heart" tone="aqua" style={{ bottom: "3rem", left: "2.5%", width: "2.1rem", rotate: "-12deg" }} />
+      </div>
       <div className="wrap">
         <header className="section-head">
           <div>

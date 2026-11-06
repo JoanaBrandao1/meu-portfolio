@@ -20,6 +20,8 @@
   /* estampas (geradas em public/patterns) */
   --oncinha: url("/patterns/oncinha.svg");
   --oncinha-rosa: url("/patterns/oncinha-rosa.svg");
+  --simbolos: url("/patterns/simbolos.svg");
+  --simbolos-opacity: 0.42;
 
   /* CD iridescente */
   --iridescent: conic-gradient(from 20deg, #e9ecf1, #ff9fb8, #8fd9f2, #ffe27a, #c4a3ff, #e9ecf1, #ffb0c4, #93ead8, #f5f6f8, #e9ecf1);
@@ -30,6 +32,7 @@
 
 .dark {
   --hot-text: var(--baby-pink);
+  --simbolos-opacity: 0.32;
 }
 
 html {
@@ -39,6 +42,52 @@ html {
 
 body {
   font-family: var(--font-body);
+}
+
+/* papel de parede com estrelinhas, corações, borboletas... (scripts/papel-de-parede.py) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--simbolos) 0 0 / 520px;
+  opacity: var(--simbolos-opacity);
+}
+
+/* ---------- adesivos ---------- */
+
+.section {
+  position: relative;
+}
+
+.sticker {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+  filter: drop-shadow(0 3px 4px rgb(60 10 30 / 0.25));
+  pointer-events: none;
+}
+
+.sticker--float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { translate: 0 -6px; }
+}
+
+.deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+
+@media (max-width: 600px) {
+  .sticker {
+    scale: 0.7;
+  }
 }
 
 ::selection {
@@ -174,7 +223,7 @@ body {
   border-radius: 50%;
   background: var(--iridescent);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.08);
-  color: #26363b;
+  color: #2b1621;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 0.62rem;
@@ -254,6 +303,10 @@ body {
   display: flex;
   align-items: center;
   padding: 7rem 0 4rem;
+}
+
+.np__text {
+  position: relative;
 }
 
 .np__grid {
@@ -465,7 +518,7 @@ body {
   z-index: 1;
   padding: 0.4rem 0.65rem;
   background: #fff6c9;
-  color: #26363b;
+  color: #2b1621;
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
   font-family: var(--font-label);
   font-size: 0.65rem;
@@ -880,7 +933,8 @@ a.track:hover .track__title,
   .eq i,
   .rec::before,
   .cover .sparkle,
-  .band__track {
+  .band__track,
+  .sticker--float {
     animation: none;
   }
 }
