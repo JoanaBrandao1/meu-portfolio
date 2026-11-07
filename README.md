@@ -22,4 +22,5 @@ Abra [http://localhost:3000](http://localhost:3000).
 - **Letreiros de neon e brilhos:** `components/neon.tsx` (cifrão, coqueiro, coração, estrela de lâmpadas) e `components/sparkle.tsx` (estrela de flash). Para mudar de lugar, ajuste o `style` de cada um nas seções.
 - **Peças de fundo do "Sobre mim":** `components/deco.tsx` (borboleta, adesivo de coração de oncinha, strass e CD). As formas são máscaras em `public/patterns/` (`borboleta.svg`, `coracao.svg`) e o preenchimento é CSS em `app/playlist.css`.
 - **Carrossel de capas e pompons:** `components/cover-carousel.tsx` e `components/pompom.tsx`.
+- **Logo (aba do navegador e topbar):** `app/icon.svg` (ícone da aba), `app/favicon.ico` e `app/apple-icon.png` (versões em imagem) e `public/logo-jb.svg` (topbar). As letras JB são da fonte Gloock (licença OFL) convertidas em desenho.
 - **Currículo:** substitua `public/files/curriculo-joana-brandao.pdf` mantendo o mesmo nome.

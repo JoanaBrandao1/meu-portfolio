@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Theme, GithubLink, LinkedinLink, EmailLink } from "@/app/links";
 
@@ -12,7 +13,8 @@ export function Navbar() {
     <header className="topbar">
       <nav className="wrap topbar__inner" aria-label="Principal">
         <Link href="#inicio" className="mark" aria-label="Início">
-          <span>JB</span>
+          {/* o mesmo logo do ícone da aba (app/icon.svg) */}
+          <Image src="/logo-jb.svg" alt="" width={64} height={64} priority />
         </Link>
 
         <div className="topbar__nav">
