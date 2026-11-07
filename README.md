@@ -25,6 +25,7 @@ Abra [http://localhost:3000](http://localhost:3000).
 - **Discman (player do início):** `components/discman.tsx`.
 - **Ícones da topbar (GitHub, LinkedIn, email):** `app/links/social-links.tsx`. Para adicionar ou trocar um, edite a lista `LINKS` nesse arquivo.
 - **Logo (aba do navegador e topbar):** `app/icon.svg` (ícone da aba), `app/favicon.ico` e `app/apple-icon.png` (versões em imagem) e `public/logo-jb.svg` (topbar). As letras JB são da fonte Gloock (licença OFL) convertidas em desenho.
+- **Imagem de compartilhamento** (aparece quando o link é colado no LinkedIn/WhatsApp): `app/opengraph-image.png`, 1200×630.
 - **Currículo:** substitua `public/files/curriculo-joana-brandao.pdf` mantendo o mesmo nome.
 
 ## Classes úteis

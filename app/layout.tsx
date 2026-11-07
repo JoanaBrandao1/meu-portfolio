@@ -46,10 +46,17 @@ const pacifico = Pacifico({
   weight: "400",
 });
 
+const title = "Joana Brandão · Engenheira da computação e desenvolvedora full-stack";
+const description =
+  "Portfólio de Joana Brandão, engenheira da computação formada pela UFRPE e desenvolvedora full-stack. Sites, apps, jogos e sistemas com React, React Native, Next.js, NestJS, Flutter e PostgreSQL.";
+
+// A imagem de compartilhamento fica em app/opengraph-image.png (o Next.js acha sozinho).
+// Quando o site tiver endereço próprio, coloque aqui: metadataBase: new URL("https://seu-endereco")
 export const metadata: Metadata = {
-  title: "Joana Brandão · Engenheira da computação e desenvolvedora full-stack",
-  description:
-    "Portfólio de Joana Brandão, engenheira da computação formada pela UFRPE e desenvolvedora full-stack. Sites, apps, jogos e sistemas com React, React Native, Next.js, NestJS, Flutter e PostgreSQL.",
+  title,
+  description,
+  openGraph: { title, description, locale: "pt_BR", type: "website" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function RootLayout({

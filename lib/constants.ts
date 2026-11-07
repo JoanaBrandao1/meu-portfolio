@@ -11,6 +11,7 @@ export const SITE = {
 export const SOCIAL_LINKS = {
   github: "https://github.com/JoanaBrandao1",
   linkedin: "https://www.linkedin.com/in/joana-beatriz-brandao/",
+  whatsapp: "https://wa.me/5581973260632",
 };
 
 // atributos de link que abre em outra aba (usado em todos os links externos)

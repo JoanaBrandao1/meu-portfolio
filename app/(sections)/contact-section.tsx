@@ -5,6 +5,7 @@ import { Neon } from "@/components/neon";
 import { Sparkle } from "@/components/sparkle";
 
 const buttons: (ComponentProps<"a"> & { label: string })[] = [
+  { label: "WhatsApp", href: SOCIAL_LINKS.whatsapp, ...EXTERNAL },
   { label: "LinkedIn", href: SOCIAL_LINKS.linkedin, ...EXTERNAL },
   { label: "GitHub", href: SOCIAL_LINKS.github, ...EXTERNAL },
   { label: "Currículo", href: SITE.cv, download: true },
