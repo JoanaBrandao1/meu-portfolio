@@ -24,9 +24,10 @@ export default function ProjectsSection() {
         <header className="section-head">
           <div>
             <p className="label">Lado A · Faixas</p>
-            <h2 className="display">
-              Projetos
-              <Sparkle className="flash-inline flash--pink" />
+            {/* mesmo visual do logo JB: Gloock cromada, contorno escuro e estrela limão */}
+            <h2 className="glam-title">
+              <span className="glam-title__text">Projetos</span>
+              <Sparkle chunky className="glam-title__star" />
             </h2>
           </div>
           <p className="label">

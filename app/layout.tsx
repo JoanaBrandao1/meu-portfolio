@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Mono, Pacifico, Shrikhand, VT323 } from "next/font/google";
+import { Archivo, Gloock, IBM_Plex_Mono, Pacifico, Shrikhand, VT323 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/layout/navbar";
 import "./globals.css";
@@ -32,6 +32,13 @@ const shrikhand = Shrikhand({
   weight: "400",
 });
 
+// título "Projetos": a mesma letra do logo JB
+const gloock = Gloock({
+  variable: "--font-gloock",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 // letra cursiva da plaquinha de neon "disponível"
 const pacifico = Pacifico({
   variable: "--font-pacifico",
@@ -53,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${archivo.variable} ${plexMono.variable} ${lcd.variable} ${shrikhand.variable} ${pacifico.variable}`}
+      className={`${archivo.variable} ${plexMono.variable} ${lcd.variable} ${shrikhand.variable} ${pacifico.variable} ${gloock.variable}`}
       suppressHydrationWarning
     >
       <body>

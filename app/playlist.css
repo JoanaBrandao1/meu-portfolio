@@ -1298,6 +1298,51 @@ body::before {
   translate: 0 -0.1em;
 }
 
+/* ---------- projetos: título no estilo do logo JB ---------- */
+
+.glam-title {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.05em 0.25em 0.12em 0.05em;
+  font-family: var(--font-gloock), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3.6rem, 9.5vw, 7.5rem);
+  line-height: 1;
+  transform: skewX(-10deg);
+  transform-origin: left bottom;
+}
+
+.glam-title__text {
+  background: linear-gradient(180deg, #ffe9f4 0%, #ff8cc6 28%, #ff3d9e 50%, #b80f63 53%, #ff5fb0 72%, #ffd0e8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* contorno escuro em volta das letras (como no logo) + sombra rosa embaixo */
+  filter:
+    drop-shadow(0.03em 0 0 #2b1621)
+    drop-shadow(-0.03em 0 0 #2b1621)
+    drop-shadow(0 0.03em 0 #2b1621)
+    drop-shadow(0 -0.03em 0 #2b1621)
+    drop-shadow(0 0.06em 0 #8a0c4b);
+}
+
+.glam-title__star {
+  position: absolute;
+  top: -0.16em;
+  right: -0.2em;
+  width: 0.6em;
+  height: 0.6em;
+  overflow: visible;
+  color: var(--lime);
+  stroke: #2b1621;
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 8px rgb(200 240 60 / 0.5));
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
 /* ---------- projetos: carrossel de capas ---------- */
 
 .carousel {
@@ -1748,6 +1793,7 @@ body::before {
   .band__track,
   .flash,
   .flash-inline,
+  .glam-title__star,
   .neon--flicker,
   .pompom--chain,
   .deco--float,
