@@ -911,7 +911,7 @@ body::before {
 .notes__grid {
   display: grid;
   /* o texto ocupa todo o espaço que sobra e a contracapa fica logo ao lado */
-  grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 27rem);
   gap: clamp(1.5rem, 3.5vw, 3rem);
   align-items: start;
 }
@@ -1026,9 +1026,23 @@ body::before {
   margin-bottom: 0.4rem;
 }
 
-/* aqui a lista não precisa da fita de oncinha, e o rótulo fica em cima do valor */
+/* aqui a lista não precisa da fita de oncinha, o rótulo fica em cima do valor
+   e os itens ficam em duas colunas, para a ficha não ficar mais alta que o texto */
 .backcover .credits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.25rem;
   padding-top: 0;
+}
+
+/* o último item (Gêneros) ocupa a linha toda */
+.backcover .credits div:last-child {
+  grid-column: 1 / -1;
+}
+
+.backcover .credits dd {
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .backcover .credits::before {
@@ -1086,7 +1100,13 @@ body::before {
   }
 
   .backcover {
-    max-width: 24rem;
+    max-width: 28rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .backcover .credits {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1193,6 +1213,13 @@ body::before {
 
 @media (max-width: 860px) {
   .deco--desktop {
+    display: none;
+  }
+}
+
+/* peças que ficam perto do título: só aparecem em telas largas, onde não encostam nele */
+@media (max-width: 1365px) {
+  .deco--wide {
     display: none;
   }
 }

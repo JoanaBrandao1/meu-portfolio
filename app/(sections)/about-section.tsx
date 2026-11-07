@@ -21,8 +21,8 @@ export default function AboutSection() {
     <section id="sobre" className="section">
       {/* fundo: neon, CD, borboletas, adesivo de oncinha, strass e brilhos */}
       <Neon kind="cifrao" className="neon--flicker" style={{ right: "1.5%", bottom: "2rem", width: "10.5rem", rotate: "8deg" }} />
-      <Neon kind="coracao" className="neon--flicker deco--desktop" style={{ top: "6.5rem", right: "2.5%", width: "10rem", rotate: "10deg" }} />
-      <Disc className="deco--desktop" style={{ left: "-5rem", top: "3.5rem", width: "14rem" }} />
+      <Neon kind="coracao" className="neon--flicker deco--desktop deco--wide" style={{ top: "6.5rem", right: "2.5%", width: "10rem", rotate: "10deg" }} />
+      <Disc className="deco--desktop deco--wide" style={{ left: "-5rem", top: "3.5rem", width: "14rem" }} />
       <HeartSticker className="deco--desktop" style={{ bottom: "2rem", left: "24%", width: "8.5rem", rotate: "-12deg" }} />
 
       <Gem tone="pink" size="1.1rem" className="deco--desktop" style={{ top: "11rem", right: "30%" }} />
