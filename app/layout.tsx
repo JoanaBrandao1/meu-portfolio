@@ -40,9 +40,9 @@ const pacifico = Pacifico({
 });
 
 export const metadata: Metadata = {
-  title: "Joana Brandão · Desenvolvedora front-end",
+  title: "Joana Brandão · Engenheira da computação e desenvolvedora full-stack",
   description:
-    "Portfólio de Joana Brandão, desenvolvedora front-end. Projetos, sobre e contato.",
+    "Portfólio de Joana Brandão, engenheira da computação formada pela UFRPE e desenvolvedora full-stack. Sites, apps, jogos e sistemas com React, React Native, Next.js, NestJS, Flutter e PostgreSQL.",
 };
 
 export default function RootLayout({

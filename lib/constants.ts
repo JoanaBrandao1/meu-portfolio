@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: "Joana Brandão",
-  role: "Desenvolvedora front-end",
+  role: "Engenheira da computação · Desenvolvedora full-stack",
   email: "joanab.dev@gmail.com",
   cv: "/files/curriculo-joana-brandao.pdf",
   year: 2026,

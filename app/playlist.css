@@ -1639,6 +1639,14 @@ body::before {
   margin: 1rem 0 2.5rem;
 }
 
+.requests__sub {
+  max-width: 34rem;
+  margin: -1rem 0 2rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--soft);
+}
+
 .requests__mail {
   display: inline-flex;
   align-items: center;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
 import { SITE } from "@/lib/constants";
@@ -62,8 +62,18 @@ export default function HeroSection() {
           </h1>
 
           <p className="np__lead">
-            <strong>{SITE.role}.</strong> Gosto de interface que tem
-            personalidade: cor, ritmo e um detalhe que faz a pessoa sorrir.
+            <strong>
+              {/* cada parte do cargo fica inteira na linha (evita quebrar "full-stack" no hífen) */}
+              {SITE.role.split(" · ").map((part, i) => (
+                <Fragment key={part}>
+                  {i > 0 && " · "}
+                  <span style={{ whiteSpace: "nowrap" }}>{part}</span>
+                </Fragment>
+              ))}
+              .
+            </strong>{" "}
+            Faço sites, apps, jogos e sistemas,
+            do banco de dados até o último detalhe da tela.
           </p>
 
           <div className="np__actions">
@@ -80,7 +90,7 @@ export default function HeroSection() {
           <p className="open-sign">
             <span className="open-sign__dot" aria-hidden="true" />
             <span className="open-sign__script">disponível</span>
-            <span className="open-sign__small">para novos projetos</span>
+            <span className="open-sign__small">para freelas e vagas</span>
           </p>
         </div>
 

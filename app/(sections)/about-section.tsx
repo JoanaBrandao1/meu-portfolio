@@ -5,13 +5,15 @@ import { Sparkle } from "@/components/sparkle";
 import { WavyTitle } from "@/components/wavy-title";
 import { Butterfly, Disc, Gem, HeartSticker } from "@/components/deco";
 
-// Este texto é um rascunho. Reescreva com as suas palavras: é o que mais deixa o site com a sua cara.
-
+// ficha técnica do "álbum": o card ao lado do texto
 const credits = [
   { label: "Produção", value: "Joana Brandão" },
-  { label: "Instrumentos", value: "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS" },
-  { label: "Também toca", value: "C# e Unity, Haskell" },
-  { label: "Em estúdio", value: "Os primeiros projetos do portfólio" },
+  { label: "Formação", value: "Engenharia da Computação, UFRPE" },
+  { label: "Front-end", value: "React, Next.js" },
+  { label: "Mobile", value: "React Native, Flutter" },
+  { label: "Back-end", value: "NestJS, PostgreSQL" },
+  { label: "Linguagens", value: "JavaScript, TypeScript" },
+  { label: "Gêneros", value: "Web, apps, jogos e sistemas" },
 ];
 
 export default function AboutSection() {
@@ -52,14 +54,15 @@ export default function AboutSection() {
         <div className="notes__grid">
           <div className="notes__text">
             <p>
-              Sou desenvolvedora front-end. Comecei com joguinhos no navegador e
-              um primeiro jogo na Unity, e foi aí que entendi que gosto mesmo é da
-              parte que a pessoa vê e clica.
+              Sou engenheira da computação formada pela UFRPE e trabalho com
+              desenvolvimento de software. Meu foco é o full-stack: gosto de
+              entender o sistema inteiro, da modelagem do banco até a interface
+              que a pessoa usa.
             </p>
             <p>
-              Hoje estudo React e Next.js e tento fazer interfaces que funcionem
-              bem e que não pareçam todas iguais. Este site é o meu primeiro
-              álbum, e ele ainda está sendo gravado.
+              Mas não quero ficar num gênero só. Faço sites, apps, jogos e
+              sistemas, e topo projeto que me tire da zona de conforto. Este site
+              é o meu primeiro álbum, e as faixas estão saindo do estúdio agora.
             </p>
           </div>
 

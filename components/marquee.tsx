@@ -1,6 +1,6 @@
 import { Sparkle } from "./sparkle";
 
-const items = ["Joana Brandão", "Vol. 1", "Edição de estreia", "Front-end", "Lado A", "Tocando agora"];
+const items = ["Joana Brandão", "Vol. 1", "Full-stack", "Engenharia da Computação", "Web", "Apps", "Jogos", "Tocando agora"];
 
 // Faixa de oncinha com texto passando. O conteúdo aparece duas vezes para o loop não ter emenda.
 export function Marquee() {

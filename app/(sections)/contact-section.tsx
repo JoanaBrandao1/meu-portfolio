@@ -19,6 +19,10 @@ export default function ContactSection() {
           <Sparkle className="flash-inline flash--white" />
         </h2>
 
+        <p className="requests__sub">
+          Freela, vaga ou aquela ideia de app que nunca saiu do papel: me chama.
+        </p>
+
         <a className="requests__mail" href={`mailto:${SITE.email}`}>
           {SITE.email}
           <ArrowUpRight aria-hidden="true" />
