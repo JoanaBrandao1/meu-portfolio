@@ -1,29 +1,35 @@
-"use client";
-
-import Link from "next/link";
 import Image from "next/image";
-import { Theme, GithubLink, LinkedinLink, EmailLink } from "@/app/links";
+import Link from "next/link";
+import { SocialLinks, Theme } from "@/app/links";
+
+const links = [
+  { href: "#sobre", label: "Sobre" },
+  { href: "#faixas", label: "Faixas" },
+  { href: "#contato", label: "Contato" },
+];
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 w-full backdrop-blur-md bg-background shadow-lg z-50">
-      <nav className="w-full flex items-center justify-between px-8 py-4">
-        <span className="pl-20 font-bold">
-          <Image alt="Logo" src="/icons/Iconejbmaius.png" width={50} height={50} />
-        </span>
+    <header className="topbar">
+      <nav className="wrap topbar__inner" aria-label="Principal">
+        <Link href="#inicio" className="mark" aria-label="Início">
+          {/* o mesmo logo do ícone da aba (app/icon.svg) */}
+          <Image src="/logo-jb.svg" alt="" width={64} height={64} priority />
+        </Link>
 
-        <div className="flex items-center pr-20">
-          <div className="flex gap-6">
-            <Link href="#about">Sobre</Link>
-            <Link href="#projects">Projetos</Link>
-            <Link href="#contact">Contato</Link>
+        <div className="topbar__nav">
+          <div className="topbar__links">
+            {links.map((link, i) => (
+              <Link key={link.href} href={link.href}>
+                <span>0{i + 1}</span>
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          <div className="ml-8 flex items-center gap-2">
-            <GithubLink />
-            <LinkedinLink />
+          <div className="topbar__icons">
+            <SocialLinks className="hide-sm" />
             <Theme />
-            <EmailLink/>
           </div>
         </div>
       </nav>

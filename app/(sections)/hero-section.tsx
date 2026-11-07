@@ -1,48 +1,109 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ArrowDownToLine } from "lucide-react";
+import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
+import { ArrowDown, ArrowDownToLine } from "lucide-react";
+import { SITE } from "@/lib/constants";
+import { Sparkle } from "@/components/sparkle";
+import { Neon } from "@/components/neon";
+import { Discman } from "@/components/discman";
 
 export default function HeroSection() {
-  return (
-    <section className="h-screen flex flex-col justify-center text-left px-8 ">
-      <div className="justify-around flex flex-row">
-        <div >
-          <span className="uppercase font-bold tracking-widest text-baby-pink mb-4">
-            Desenvolvedora Front-end
-          </span>
+  const [playing, setPlaying] = useState(true);
 
-          <h1 className="text-7xl md:text-7xl font-bold leading-tight">
-            Olá! Me chamo
+  // quem pediu "menos movimento" no sistema começa com o disco parado
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPlaying(false);
+    }
+  }, []);
+
+  return (
+    <section id="inicio" className="np" data-playing={playing}>
+      <Neon
+        kind="estrela"
+        className="neon--flicker"
+        style={{ left: "-5rem", bottom: "-4.5rem", width: "18rem", rotate: "-10deg" }}
+      />
+
+      <div className="wrap np__grid">
+        <div className="np__text">
+          <Sparkle className="flash flash--white" style={{ top: "1.6rem", left: "21rem", width: "1.5rem" }} />
+          <Sparkle className="flash flash--lime" style={{ bottom: "1.2rem", right: "6%", width: "2rem" }} />
+          <p className="label np__now">
+            <span className="eq" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
+            {playing ? "Tocando agora" : "Pausado"}
+          </p>
+
+          <h1 className="display np__title">
+            Joana
             <br />
-            <span className="text-pink">Joana Brandão</span>
+            <em className="chrome">Brandão</em>
           </h1>
 
-          <p className="text-pink-foreground/60 mt-6 max-w-lg text-xl">
-            Transformo ideias em experiências digitais elegantes e funcionais.
-            Apaixonada por código limpo e design intuitivo.
+          <p className="np__lead">
+            <strong>
+              {/* cada parte do cargo fica inteira na linha (evita quebrar "full-stack" no hífen) */}
+              {SITE.role.split(" · ").map((part, i) => (
+                <Fragment key={part}>
+                  {i > 0 && " · "}
+                  <span style={{ whiteSpace: "nowrap" }}>{part}</span>
+                </Fragment>
+              ))}
+              .
+            </strong>{" "}
+            Faço sites, apps, jogos e sistemas,
+            do banco de dados até o último detalhe da tela.
           </p>
-          <Button variant="pink" className='rounded-full mt-8 px-10 py-6 !text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(244,114,182,0.6)] hover:scale-105'>
-            <a href="/files/Currículo joana 2024.pdf" target="_blank" rel="noopener noreferrer" className='flex flex-row items-center gap-2'>
-              <ArrowDownToLine /> <div>Baixar CV</div>
-            </a>
-          </Button>
-          <div className='flex items-center gap-2 mt-4'>
-            <div className="relative flex items-center justify-center">
-              <span className="absolute inline-flex h-3 w-3 rounded-full bg-pink opacity-75 animate-ping"></span>
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-pink"></span>
-            </div>
 
-            <div className='text-pink'>Disponível para novos projetos</div>
+          <div className="np__actions">
+            <a className="btn btn--solid" href={SITE.cv} download>
+              <ArrowDownToLine aria-hidden="true" />
+              Baixar CV
+            </a>
+            <a className="btn btn--ghost" href="#faixas">
+              <ArrowDown aria-hidden="true" />
+              Ver as faixas
+            </a>
           </div>
+
+          <p className="open-sign">
+            <span className="open-sign__dot" aria-hidden="true" />
+            <span className="open-sign__script">disponível</span>
+            <span className="open-sign__small">para freelas e vagas</span>
+          </p>
         </div>
-        <div className="relative justify-center hidden md:flex ">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="absolute w-[420px] h-[420px] rounded-full bg-pink/60 blur-3xl" />
-            <div className="w-[380px] h-[380px] rounded-full bg-pink border-10 border-white" />
+
+        <div className="np__art">
+          <div className="cover">
+            <div className="cd" aria-hidden="true" />
+            <Sparkle className="flash flash--pink" style={{ top: "-7%", left: "-8%", width: "3.2rem" }} />
+            <Sparkle className="flash flash--white" style={{ top: "9%", left: "-12%", width: "1.3rem" }} />
+            <Sparkle className="flash flash--lime" style={{ bottom: "-8%", right: "-24%", width: "2.4rem" }} />
+            <div className="sleeve">
+              <div className="sleeve__title">
+                <span>{SITE.name}</span>
+                <span>Vol. 1</span>
+              </div>
+              <Image
+                src="/images/imagem-joana-Photoroom.png"
+                alt="Joana dançando de fone de ouvido"
+                width={1024}
+                height={1024}
+                sizes="(max-width: 860px) 24rem, 30rem"
+                priority
+              />
+              <span className="sleeve__sticker">Edição de estreia</span>
+            </div>
           </div>
-          <Image alt="Logo" src="/images/imagem-joana-Photoroom.png" width={500} height={500} className="relative z-10 pt-10" />
+
+          <Sparkle className="flash flash--pink" style={{ bottom: "-1.6rem", left: "-1.8rem", width: "2.2rem" }} />
+          <Discman playing={playing} onToggle={() => setPlaying((p) => !p)} />
         </div>
       </div>
     </section>

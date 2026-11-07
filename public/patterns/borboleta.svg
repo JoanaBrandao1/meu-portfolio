@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <g id="asa">
+      <path fill-rule="evenodd" d="M48 47C41 24 23 5 9 9C-1 13 1 33 13 43C23 51 37 52 48 50Z M17 22C12 24 12 33 18 38C23 41 27 37 25 30C23 24 21 21 17 22Z"/>
+      <path fill-rule="evenodd" d="M48 53C37 54 21 59 18 73C16 87 32 94 41 82C46 74 48 63 48 53Z M31 72C27 74 27 81 32 82C36 82 37 77 35 74C34 72 33 71 31 72Z"/>
+    </g>
+  </defs>
+  <use href="#asa"/>
+  <use href="#asa" transform="translate(100 0) scale(-1 1)"/>
+  <rect x="47" y="30" width="6" height="52" rx="3"/>
+  <path d="M49 32C46 22 41 16 36 13M51 32C54 22 59 16 64 13" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="35.5" cy="12.5" r="2.4"/>
+  <circle cx="64.5" cy="12.5" r="2.4"/>
+</svg>

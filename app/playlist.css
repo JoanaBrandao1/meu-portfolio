@@ -1,0 +1,1743 @@
+/*
+  Tema "playlist" do portfólio.
+  As cores vêm das variáveis do globals.css (--background, --foreground,
+  --pink, --pink-secondary, --baby-pink), então o modo escuro funciona sozinho.
+*/
+
+:root {
+  --ink: var(--foreground);
+  --paper: var(--background);
+  --line: color-mix(in oklab, var(--foreground) 14%, transparent);
+  --soft: color-mix(in oklab, var(--foreground) 62%, transparent);
+  --hot: var(--pink);
+  --hot-text: var(--pink-secondary);
+
+  --font-display: var(--font-archivo), "Arial Narrow", system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-label: var(--font-plex-mono), ui-monospace, monospace;
+  --font-lcd: var(--font-lcd), var(--font-plex-mono), monospace;
+
+  /* estampas (geradas em public/patterns) */
+  --oncinha: url("/patterns/oncinha.svg");
+  --oncinha-rosa: url("/patterns/oncinha-rosa.svg");
+  --fundo: url("/patterns/oncinha-nude.svg");
+  --glitter: url("/patterns/glitter.svg");
+
+  /* pedrinha de strass (usada nas fileiras de bolinhas) */
+  --strass-brilho: radial-gradient(circle at 42% 38%, #fff 0 1.1px, transparent 1.6px);
+  --strass-pedra: radial-gradient(circle, #fbfcfe 0 1.8px, #c9d0d9 2.6px 3.6px, #737d89 4.2px 4.7px, transparent 5.1px);
+
+  /* verde-limão neon, o segundo destaque depois do rosa */
+  --lime: #c8f03c;
+  --lime-ink: #1d2306;
+
+  /* letra cromada rosa (nome do início, contato e capa 01 do carrossel) */
+  --chrome-rosa: linear-gradient(180deg, #fff3f6 0%, #ffc3d0 24%, #e07b8d 47%, #8f2b3f 50%, #e98a9c 60%, #ffd9e1 82%, #f2a0b0 100%);
+
+  /* CD iridescente */
+  --iridescent: conic-gradient(from 20deg, #e9ecf1, #ff9fb8, #8fd9f2, #ffe27a, #c4a3ff, #e9ecf1, #ffb0c4, #93ead8, #f5f6f8, #e9ecf1);
+
+  --page-x: clamp(1.25rem, 5vw, 4.5rem);
+  --max: 76rem;
+}
+
+.dark {
+  --hot-text: var(--baby-pink);
+  --fundo: url("/patterns/oncinha-noite.svg");
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* oncinha tom sobre tom no fundo da página toda */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--fundo) 0 0 / 330px;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--lime-ink);
+}
+
+/* ---------- peças reutilizáveis ---------- */
+
+.label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 70;
+  font-stretch: 70%;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--page-x);
+}
+
+.section {
+  position: relative;
+  overflow-x: clip;
+  padding: clamp(4.5rem, 10vw, 8rem) 0;
+}
+
+/* o conteúdo fica na frente dos letreiros de neon */
+.section > .wrap,
+.np > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* divisão entre as seções: fita de oncinha com strass em cima e embaixo, igual à faixa do texto */
+.section::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: -15px;
+  height: 30px;
+  background: var(--oncinha) center / 150px;
+  border-block: 2px solid #2b1d14;
+  pointer-events: none;
+}
+
+.section::after,
+.footer::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top: -21px;
+  height: 42px;
+  background:
+    var(--strass-brilho) 0 0 / 14px 12px repeat-x,
+    var(--strass-pedra) 0 0 / 14px 12px repeat-x,
+    var(--strass-brilho) 0 100% / 14px 12px repeat-x,
+    var(--strass-pedra) 0 100% / 14px 12px repeat-x;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
+  pointer-events: none;
+}
+
+/* logo depois da faixa do texto não precisa de outra fita */
+.band + .section::before,
+.band + .section::after {
+  display: none;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section-head h2 {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  margin-top: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 3rem;
+  padding: 0 1.4rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn--solid {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  border-color: #8f2b3f;
+  background: linear-gradient(180deg, #ee93a5 0%, #c9506a 48%, #b73d53 52%, #a8384d 100%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 6px 14px -8px #a8384d;
+  text-shadow: 0 1px 0 rgb(110 20 40 / 0.5);
+}
+
+/* o brilho de cima do botão de gel */
+.btn--solid::before {
+  content: "";
+  position: absolute;
+  inset: 2px 10px auto;
+  height: 45%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.65), rgb(255 255 255 / 0.05));
+  pointer-events: none;
+}
+
+.btn--solid:hover {
+  filter: brightness(1.08) saturate(1.1);
+}
+
+.btn--ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------- navbar ---------- */
+
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 4rem;
+}
+
+.mark {
+  display: block;
+  width: 2.9rem;
+  height: 2.9rem;
+  flex: none;
+  transition: rotate 0.8s;
+}
+
+.mark img {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.3));
+}
+
+.mark:hover {
+  rotate: -12deg;
+}
+
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2rem);
+}
+
+.topbar__links {
+  display: flex;
+  gap: clamp(0.9rem, 2.5vw, 1.75rem);
+}
+
+.topbar__links a {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.topbar__links a span {
+  color: var(--hot-text);
+  margin-right: 0.35rem;
+}
+
+.topbar__links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.topbar__icons {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+@media (max-width: 720px) {
+  .topbar__links a span,
+  .topbar__icons .hide-sm {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .topbar__links {
+    display: none;
+  }
+}
+
+/* ---------- hero: tocando agora ---------- */
+
+.np {
+  position: relative;
+  overflow-x: clip;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 0 4rem;
+}
+
+.np__text,
+.np__art {
+  position: relative;
+}
+
+.np__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+
+.dark .np__now {
+  color: var(--lime);
+}
+
+.np__now {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--hot-text);
+}
+
+.np__title {
+  font-size: clamp(3.75rem, 8.25vw, 7.75rem);
+  margin: 1.25rem 0 1.5rem;
+}
+
+/* letra cromada rosa, estilo capa de CD dos anos 2000 */
+.chrome {
+  font-style: normal;
+  color: var(--hot);
+  background:
+    var(--glitter) 0 0 / 140px,
+    var(--chrome-rosa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.7)) drop-shadow(0 3px 0 #8f2b3f);
+}
+
+.np__lead {
+  max-width: 30rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--soft);
+}
+
+.np__lead strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.np__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* letreiro de neon "disponível", da largura do texto de cima */
+.open-sign {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 2.25rem;
+  padding: 1.35rem 1.6rem 1.5rem;
+  border-radius: 1.1rem;
+  background: #1a0d13;
+  border: 2px solid rgb(200 240 60 / 0.4);
+  box-shadow:
+    inset 0 0 28px rgb(200 240 60 / 0.14),
+    0 0 22px -6px rgb(200 240 60 / 0.35),
+    0 14px 28px -14px rgb(0 0 0 / 0.75);
+  rotate: -1.5deg;
+}
+
+/* lâmpadas em cima e embaixo, como placa de Las Vegas */
+.open-sign::before,
+.open-sign::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  height: 8px;
+  background: radial-gradient(circle, #fff6c8 0 1.6px, #ffc94d 2.2px 3px, rgb(255 180 60 / 0.35) 3.6px, transparent 4px) 0 0 / 16px 8px repeat-x;
+  filter: drop-shadow(0 0 3px #ffb23f);
+  animation: bulbs 1.2s steps(1) infinite;
+}
+
+.open-sign::before { top: 0.45rem; }
+.open-sign::after { bottom: 0.45rem; animation-delay: -0.6s; }
+
+@keyframes bulbs {
+  50% { background-position: 8px 0; }
+}
+
+.open-sign__dot {
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 6px var(--lime), 0 0 14px var(--lime);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; box-shadow: 0 0 2px var(--lime); }
+}
+
+.open-sign__script {
+  font-family: var(--font-pacifico), "Brush Script MT", cursive;
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  line-height: 1.15;
+  color: #efffc2;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 8px var(--lime),
+    0 0 18px var(--lime),
+    0 0 34px rgb(200 240 60 / 0.6);
+  animation: flicker 9s linear infinite;
+}
+
+.open-sign__small {
+  margin-left: auto;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(200 240 60 / 0.9);
+  max-width: 8rem;
+  line-height: 1.4;
+  text-shadow: 0 0 6px rgb(200 240 60 / 0.5);
+}
+
+@media (max-width: 420px) {
+  .open-sign {
+    padding: 1.1rem 1.1rem 1.25rem;
+    gap: 0.7rem;
+  }
+
+  .open-sign__small {
+    font-size: 0.65rem;
+  }
+}
+
+/* equalizador do "tocando agora" */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 0.8rem;
+}
+
+.eq i {
+  width: 3px;
+  height: 100%;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite alternate;
+}
+
+.eq i:nth-child(2) { animation-delay: -0.3s; animation-duration: 0.7s; }
+.eq i:nth-child(3) { animation-delay: -0.6s; animation-duration: 1.1s; }
+
+@keyframes eq {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}
+
+/* capa + disco */
+.np__art {
+  width: 100%;
+  max-width: 30rem;
+  justify-self: end;
+}
+
+.cover {
+  position: relative;
+  margin-right: 18%;
+}
+
+/* CD iridescente: só o visual. A posição fica com quem usa (.cover .cd, .cover-card__cd, .disc) */
+.cd {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(255 255 255 / 0.9) 0 15%, #c9ced6 15.5% 16.5%, rgb(255 255 255 / 0) 17%),
+    repeating-radial-gradient(circle, rgb(255 255 255 / 0) 0 3px, rgb(255 255 255 / 0.18) 3.5px 4px),
+    var(--iridescent);
+  -webkit-mask: radial-gradient(circle, transparent 0 6.5%, #000 7%);
+  mask: radial-gradient(circle, transparent 0 6.5%, #000 7%);
+  box-shadow: inset 0 0 0 2px rgb(150 160 175 / 0.6), inset 0 0 0 5px rgb(255 255 255 / 0.5);
+}
+
+/* o CD que sai de trás da capa do início */
+.cover .cd {
+  position: absolute;
+  top: 5%;
+  right: -22%;
+  width: 90%;
+  filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.25));
+  animation: spin 5s linear infinite;
+}
+
+/* reflexo de luz no CD */
+.cd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, transparent 0 8%, rgb(255 255 255 / 0.8) 12%, transparent 18% 58%, rgb(255 255 255 / 0.55) 62%, transparent 68%);
+  mix-blend-mode: soft-light;
+}
+
+@keyframes spin {
+  to { rotate: 360deg; }
+}
+
+.sparkle {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+  flex: none;
+}
+
+
+
+@keyframes twinkle {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.55; opacity: 0.55; rotate: 20deg; }
+}
+
+.sleeve {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--oncinha-rosa) center / 240px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.5);
+  rotate: -2deg;
+}
+
+.sleeve img {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: auto;
+  translate: 0 8%;
+  scale: 1.12;
+}
+
+.sleeve__title {
+  position: absolute;
+  top: 0.9rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgb(100 20 40 / 0.6);
+  z-index: 1;
+}
+
+/* plástico brilhante por cima das capas (início e carrossel) */
+.sleeve::after,
+.cover-card__sleeve::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgb(255 255 255 / 0.35) 0%, rgb(255 255 255 / 0) 32%, rgb(255 255 255 / 0) 70%, rgb(255 255 255 / 0.18) 100%);
+  pointer-events: none;
+}
+
+.sleeve__sticker {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 1;
+  padding: 0.4rem 0.65rem;
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  rotate: 4deg;
+}
+
+/* discman */
+.discman {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 2.5rem;
+  padding: 0.75rem;
+  border-radius: 1.4rem;
+  background: linear-gradient(180deg, #fbfcfd 0%, #d5dbe1 42%, #eef1f4 58%, #b9c1ca 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -2px 3px rgb(0 0 0 / 0.12),
+    0 12px 26px -16px rgb(0 0 0 / 0.55);
+  border: 1px solid #a9b1ba;
+}
+
+/* botão redondo de gel rosa (play do Discman e setas do carrossel) */
+.gel-round {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 22%, rgb(255 255 255 / 0.85), rgb(255 255 255 / 0) 70%),
+    linear-gradient(180deg, #f08ea1, #b73d53);
+  box-shadow: inset 0 -3px 6px rgb(90 10 30 / 0.35), 0 3px 8px -3px #8f2b3f;
+  border: 1px solid #8f2b3f;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.gel-round:hover {
+  filter: brightness(1.08);
+}
+
+.discman__play {
+  flex: none;
+  width: 3.1rem;
+  height: 3.1rem;
+}
+
+.discman__play svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.lcd {
+  flex: 1;
+  min-width: 0;
+  padding: 0.45rem 0.75rem 0.5rem;
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, #b9e02c, #d4f55a);
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.3), 0 0 14px -4px var(--lime);
+  color: var(--lime-ink);
+  font-family: var(--font-lcd);
+  font-size: 1.2rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.lcd__row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+
+.lcd__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lcd__bar {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  height: 0.55rem;
+}
+
+.lcd__bar i {
+  flex: 1;
+  background: rgb(29 35 6 / 0.15);
+}
+
+.lcd__bar i[data-on="true"] {
+  background: var(--lime-ink);
+}
+
+@media (max-width: 420px) {
+  .lcd {
+    font-size: 1rem;
+  }
+}
+
+/* pausado: o disco e o equalizador param */
+[data-playing="false"] .cd,
+[data-playing="false"] .eq i {
+  animation-play-state: paused;
+}
+
+@media (max-width: 860px) {
+  .np__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .np__art {
+    justify-self: start;
+    max-width: 22rem;
+  }
+}
+
+/* ---------- letreiros de neon ---------- */
+
+.neon {
+  position: absolute;
+  z-index: 0;
+  height: auto;
+  overflow: visible; /* deixa o brilho passar da borda do desenho */
+  pointer-events: none;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  --neon-amber: #ffb23f;
+  --neon-lime: #c8f03c;
+  --neon-pink: #ff4f93;
+  --neon-green: #4dff7c;
+  --neon-core: #fff4dc;
+}
+
+/* no claro o brilho aparece menos, então o tubo fica mais forte */
+:root:not(.dark) .neon {
+  --neon-amber: #ea8a1c;
+  --neon-lime: #93b81a;
+  --neon-pink: #e5407e;
+  --neon-green: #1fbf52;
+  --neon-core: #fff2d6;
+  opacity: 0.85;
+}
+
+.neon__tube {
+  stroke-width: 3.4;
+}
+
+.neon__amber { stroke: var(--neon-amber); }
+.neon__lime { stroke: var(--neon-lime); }
+.neon__pink { stroke: var(--neon-pink); }
+
+.neon__green-outline {
+  fill: none;
+  stroke: var(--neon-green);
+  stroke-width: 14;
+}
+
+.neon__core {
+  fill: none;
+  stroke: var(--neon-core);
+  stroke-width: 1.1;
+  opacity: 0.85;
+}
+
+.neon__bulb {
+  fill: #ffe6b0;
+  stroke: var(--neon-amber);
+  stroke-width: 1.4;
+}
+
+.neon--flicker {
+  animation: flicker 7s linear infinite;
+}
+
+@keyframes flicker {
+  0%, 18%, 20.5%, 22%, 61%, 62.5%, 100% { opacity: 1; }
+  19%, 21.5%, 62% { opacity: 0.35; }
+}
+
+@media (max-width: 860px) {
+  .neon {
+    opacity: 0.3 !important;
+  }
+}
+
+/* ---------- brilhos (estrela de flash) ---------- */
+
+.flash {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+  pointer-events: none;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.flash-inline {
+  display: inline-block;
+  width: 0.32em;
+  height: 0.32em;
+  margin-left: 0.08em;
+  vertical-align: top;
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.flash--pink {
+  color: #ff4f93;
+  filter: drop-shadow(0 0 6px rgb(255 79 147 / 0.6));
+}
+
+.flash--lime {
+  color: var(--lime);
+  filter: drop-shadow(0 0 6px rgb(200 240 60 / 0.7));
+  animation-delay: -0.9s;
+}
+
+.flash--white {
+  color: #fff;
+  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 2px #e07b8d);
+  animation-delay: -1.7s;
+}
+
+/* no fundo nude, as estrelas claras precisam de contorno */
+:root:not(.dark) .flash--white {
+  filter: drop-shadow(0 0 1px #b73d53) drop-shadow(0 0 4px #e07b8d);
+}
+
+:root:not(.dark) .flash--lime {
+  filter: drop-shadow(0 0 1px #6f8a10) drop-shadow(0 0 5px rgb(150 190 20 / 0.7));
+}
+
+/* ---------- faixa de oncinha ---------- */
+
+.band {
+  position: relative;
+  overflow: clip visible;
+  background: var(--oncinha) center / 200px;
+  border-block: 2px solid #2b1d14;
+  padding: 0.7rem 0;
+}
+
+.band__track {
+  display: flex;
+  width: max-content;
+  animation: band 38s linear infinite;
+}
+
+.band__group {
+  display: flex;
+}
+
+.band__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  font-stretch: 75%;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-text-stroke: 5px #2b1d14;
+  paint-order: stroke fill;
+}
+
+.band__item .sparkle {
+  color: #ffd9e1;
+  filter: drop-shadow(0 0 1px #2b1d14) drop-shadow(0 0 1px #2b1d14);
+}
+
+/* strass em cima e embaixo da faixa do texto */
+.band::before,
+.band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  z-index: 1;
+  background:
+    var(--strass-brilho) 0 0 / 14px 12px repeat-x,
+    var(--strass-pedra) 0 0 / 14px 12px repeat-x;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.25));
+}
+
+.band::before { top: -7px; }
+.band::after { bottom: -7px; }
+
+@keyframes band {
+  to { transform: translateX(-50%); }
+}
+
+
+
+/* ---------- sobre: encarte ---------- */
+
+.notes__grid {
+  display: grid;
+  /* o texto ocupa todo o espaço que sobra e a contracapa fica logo ao lado */
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 27rem);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+.about__title {
+  position: relative;
+  /* quanto o "Sobre mim" estica na horizontal; a borboleta usa o mesmo valor para pousar no fim */
+  --title-stretch: 1.35;
+  --butterfly-x: calc(100% * var(--title-stretch));
+  --butterfly-y: 0.5rem;
+}
+
+.notes__text p {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  line-height: 1.45;
+}
+
+.notes__text p + p {
+  margin-top: 1.25rem;
+  color: var(--soft);
+}
+
+/* ficha técnica (dentro da contracapa): rótulo em cima do valor, em duas colunas,
+   para a ficha não ficar mais alta que o texto */
+.credits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.25rem;
+}
+
+.credits div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* o último item (Gêneros) ocupa a linha toda */
+.credits div:last-child {
+  grid-column: 1 / -1;
+  border-bottom: 0;
+}
+
+.credits dt {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--soft);
+  padding-top: 0.15rem;
+}
+
+.credits dd {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* contracapa do álbum: lombada de oncinha rosa + ficha técnica no verso */
+.backcover {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr);
+  margin-top: 0.5rem;
+  rotate: 1.5deg;
+  border: 2px solid #2b1d14;
+  border-radius: 6px;
+  background: var(--card);
+  /* a borda clara em volta lembra o plástico do estojo de CD */
+  box-shadow:
+    0 0 0 5px color-mix(in oklab, var(--foreground) 10%, transparent),
+    0 22px 34px -18px rgb(0 0 0 / 0.6);
+}
+
+.backcover__spine {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: var(--oncinha-rosa) center / 130px;
+  border-right: 2px solid #2b1d14;
+}
+
+/* strass na emenda entre a lombada e o verso */
+.backcover__spine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -8px;
+  width: 12px;
+  background:
+    radial-gradient(circle at 42% 38%, #fff 0 1.1px, transparent 1.6px),
+    radial-gradient(circle, #fbfcfe 0 1.8px, #c9d0d9 2.6px 3.6px, #737d89 4.2px 4.7px, transparent 5.1px);
+  background-size: 12px 14px;
+  background-repeat: repeat-y;
+  filter: drop-shadow(1px 0 1px rgb(0 0 0 / 0.25));
+}
+
+.backcover__spine span {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  font-stretch: 75%;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-text-stroke: 5px #2b1d14;
+  paint-order: stroke fill;
+}
+
+.backcover__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.3rem 1.3rem 1.1rem 1.6rem;
+}
+
+.backcover__title {
+  color: var(--hot-text);
+  margin-bottom: 0.4rem;
+}
+
+.backcover__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+
+.backcover__sticker {
+  rotate: -4deg;
+  padding: 0.35rem 0.5rem;
+  border: 1.5px solid var(--lime-ink);
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* código de barras em etiqueta branca */
+.backcover__barcode {
+  flex: none;
+  width: 5.6rem;
+  height: 2.6rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px, #111 12px 13px, transparent 13px 16px) content-box,
+    #fff;
+}
+
+@media (max-width: 860px) {
+  .notes__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .backcover {
+    max-width: 28rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .credits {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- sobre: peças de fundo ---------- */
+
+.butterfly,
+.heart-sticker {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.butterfly {
+  aspect-ratio: 1;
+  filter: drop-shadow(0 0 1px #8a0c4b) drop-shadow(0 5px 6px rgb(0 0 0 / 0.35));
+}
+
+.butterfly__fill,
+.heart-sticker__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* a forma vem da máscara; o preenchimento é glitter sobre um degradê cromado */
+.butterfly__fill {
+  -webkit-mask: url("/patterns/borboleta.svg") center / contain no-repeat;
+  mask: url("/patterns/borboleta.svg") center / contain no-repeat;
+  background:
+    var(--glitter) 0 0 / 90px,
+    linear-gradient(135deg, #ffe3f1 0%, #ff8cc6 30%, #ff3d9e 55%, #b80f63 70%, #ff5fb0 100%);
+}
+
+
+
+/* adesivo: coração de oncinha com a borda branca recortada */
+.heart-sticker {
+  aspect-ratio: 100 / 92;
+  filter:
+    drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(0 7px 8px rgb(0 0 0 / 0.35));
+}
+
+.heart-sticker__fill {
+  -webkit-mask: url("/patterns/coracao.svg") center / contain no-repeat;
+  mask: url("/patterns/coracao.svg") center / contain no-repeat;
+  background: var(--oncinha) center / 90px;
+}
+
+/* pedras de strass soltas */
+.gem {
+  position: absolute;
+  z-index: 0;
+  width: var(--s, 1rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.4));
+}
+
+.gem--clear {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #fbfcfe 0 28%, #c9d0d9 58%, #737d89 84%, transparent 86%);
+}
+
+.gem--pink {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #ffc2e2 0 26%, #ff3d9e 58%, #8a0c4b 84%, transparent 86%);
+}
+
+.gem--lime {
+  background:
+    radial-gradient(circle at 34% 30%, #fff 0 14%, transparent 26%),
+    radial-gradient(circle, #f6ffd0 0 26%, #c8f03c 58%, #5b7a08 84%, transparent 86%);
+}
+
+/* CD de enfeite: o visual vem do .cd, aqui ele fica solto e gira bem devagar */
+.disc {
+  position: absolute;
+  z-index: 0;
+  filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.25));
+  animation: spin 40s linear infinite;
+  pointer-events: none;
+}
+
+.deco--float {
+  animation: drift 5s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -0.7rem; }
+}
+
+/* título "Sobre mim" em onda, cromado rosa-choque */
+.wavy {
+  font-family: var(--font-shrikhand), var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 8.5vw, 6.5rem);
+  line-height: 1;
+  margin-top: 0.75rem;
+  padding: 0.1em 0 0.15em;
+  rotate: -3deg;
+  scale: var(--title-stretch, 1) 1; /* estica as letras na horizontal */
+  transform-origin: left center;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 600px) {
+  .wavy {
+    font-size: 2.6rem;
+  }
+
+  /* no celular o título ocupa a largura toda, então a borboleta pousa em cima do fim dele */
+  .about__title {
+    --title-stretch: 1.15;
+    --butterfly-x: calc(100% - 3rem);
+    --butterfly-y: -1.5rem;
+  }
+}
+
+/* "Sobre mim" mais perto do texto de baixo */
+.section-head--tight {
+  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.wavy__word {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.wavy__char {
+  display: inline-block;
+  background:
+    var(--glitter) 0 0 / 120px,
+    linear-gradient(180deg, #ffe3f1 0%, #ff8cc6 26%, #ff3d9e 48%, #b80f63 52%, #ff5fb0 64%, #ffc2e2 88%, #ff7dbf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgb(255 255 255 / 0.7)) drop-shadow(0 3px 0 #8a0c4b);
+  /* o degradê só pinta dentro da caixa da letra, e a fonte é inclinada: a bolinha do "i" e os pés
+     das letras passam dos lados da caixa. O espaço extra (compensado pela margem negativa)
+     aumenta a área pintada sem mudar o espaçamento entre as letras (0.02em de cada lado, como antes) */
+  padding: 0.35em 0.2em 0.15em;
+  margin: -0.35em -0.18em -0.15em;
+}
+
+.wavy__star {
+  width: 0.6em;
+  height: 0.6em;
+  margin: 0 0.06em 0 0.1em;
+  color: #ff3d9e;
+  filter: drop-shadow(0 0 6px rgb(255 61 158 / 0.7));
+  translate: 0 -0.1em;
+}
+
+/* ---------- projetos: título no estilo do logo JB (Gloock), em prata ---------- */
+
+.glam-title {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.05em 0.25em 0.12em 0.05em;
+  font-family: var(--font-gloock), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3.6rem, 9.5vw, 7.5rem);
+  line-height: 1;
+  transform: skewX(-10deg);
+  transform-origin: left bottom;
+}
+
+.glam-title__text {
+  /* cromado prata: reflexo de luz passando + glitter + metal com a faixa escura no meio */
+  background:
+    linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.95) 50%, transparent 60%) -150% 0 / 250% 100% no-repeat,
+    var(--glitter) 0 0 / 120px,
+    linear-gradient(180deg, #ffffff 0%, #eef1f5 22%, #c3cad3 46%, #5b6470 50%, #8e98a4 54%, #dfe4ea 74%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* contorno escuro em volta das letras (como no logo) + sombra embaixo */
+  filter:
+    drop-shadow(0.03em 0 0 #2b1621)
+    drop-shadow(-0.03em 0 0 #2b1621)
+    drop-shadow(0 0.03em 0 #2b1621)
+    drop-shadow(0 -0.03em 0 #2b1621)
+    drop-shadow(0 0.06em 0 #3a3f47);
+  animation: chrome-shine 5s ease-in-out infinite;
+}
+
+/* a faixa de luz atravessa as letras e some, a cada 5s */
+@keyframes chrome-shine {
+  0%, 55% { background-position: -150% 0, 0 0, 0 0; }
+  85%, 100% { background-position: 250% 0, 0 0, 0 0; }
+}
+
+.glam-title__star {
+  position: absolute;
+  top: -0.16em;
+  right: -0.2em;
+  width: 0.6em;
+  height: 0.6em;
+  overflow: visible;
+  color: var(--lime);
+  stroke: #2b1621;
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0 8px rgb(200 240 60 / 0.5));
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+/* ---------- projetos: carrossel de capas ---------- */
+
+.carousel {
+  --cover-size: clamp(13rem, 26vw, 19rem);
+  outline: none;
+}
+
+.carousel:focus-visible .cover-card[data-active="true"] .cover-card__sleeve {
+  outline: 3px solid var(--lime);
+  outline-offset: 4px;
+}
+
+.carousel__stage {
+  position: relative;
+  height: calc(var(--cover-size) * 1.08);
+  perspective: 1100px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.cover-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--cover-size);
+  aspect-ratio: 1;
+  cursor: pointer;
+  transform: translateX(-50%) translateX(var(--x)) rotateY(var(--ry)) scale(var(--s));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s;
+}
+
+.cover-card[data-active="true"] {
+  cursor: default;
+}
+
+/* o CD fica escondido atrás e sai quando a capa chega no meio */
+.cover-card__cd {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  transition: translate 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+}
+
+.cover-card[data-active="true"] .cover-card__cd {
+  translate: 52% 0;
+  animation: spin 5s linear infinite;
+}
+
+.cover-card__sleeve {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--oncinha-rosa) center / 220px;
+  box-shadow: 0 18px 36px -18px rgb(0 0 0 / 0.6);
+  filter: brightness(var(--dim));
+  transition: filter 0.4s;
+}
+
+
+.cover-card__sleeve[data-variant="1"] { background: var(--oncinha) center / 200px; }
+.cover-card__sleeve[data-variant="2"] { background: var(--lime); }
+.cover-card__sleeve[data-variant="3"] { background: #1a0d13; }
+
+.cover-card__top {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.9rem;
+  right: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgb(60 10 30 / 0.6);
+}
+
+.cover-card__sleeve[data-variant="2"] .cover-card__top {
+  color: var(--lime-ink);
+  text-shadow: none;
+}
+
+.cover-card__big {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 70;
+  font-stretch: 70%;
+  font-size: calc(var(--cover-size) * 0.42);
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 0.6rem;
+  color: #fff;
+  -webkit-text-stroke: 3px #2b1621;
+  paint-order: stroke fill;
+}
+
+/* cada capa com um acabamento diferente */
+.cover-card__sleeve[data-variant="0"] .cover-card__big {
+  background: var(--glitter) 0 0 / 120px, var(--chrome-rosa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 3px 0 #8f2b3f) drop-shadow(0 0 1px #fff);
+}
+
+.cover-card__sleeve[data-variant="2"] .cover-card__big {
+  color: var(--lime-ink);
+  -webkit-text-stroke: 0;
+}
+
+.cover-card__sleeve[data-variant="3"] .cover-card__big {
+  color: #ffd6ea;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 0 6px #ff4f93, 0 0 18px #ff4f93, 0 0 32px rgb(255 79 147 / 0.6);
+}
+
+.cover-card__logo {
+  max-width: 62%;
+  max-height: 62%;
+  object-fit: contain;
+}
+
+.cover-card__tag {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  rotate: 4deg;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+}
+
+.cover-card__sleeve[data-variant="2"] .cover-card__tag {
+  background: #1a0d13;
+  color: var(--lime);
+}
+
+/* barra embaixo: setas e informações da capa do meio */
+.carousel__bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 40rem;
+  margin: 2.5rem auto 0;
+  text-align: center;
+}
+
+.carousel__arrow {
+  width: 3rem;
+  height: 3rem;
+}
+
+.carousel__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel__arrow svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.carousel__n {
+  color: var(--hot-text);
+}
+
+.carousel__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  font-stretch: 75%;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.carousel__title--soon {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--foreground) 60%, transparent);
+}
+
+.carousel__desc {
+  color: var(--soft);
+  margin-bottom: 0.6rem;
+}
+
+.carousel__links {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.carousel__dots span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background-color 0.3s, scale 0.3s;
+}
+
+.carousel__dots span[data-on="true"] {
+  background: var(--hot);
+  scale: 1.3;
+}
+
+.carousel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.carousel__link:hover {
+  color: var(--hot-text);
+}
+
+.rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.rec::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #e0473d;
+  animation: blink 1.6s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+
+.carousel__note {
+  margin-top: 2.5rem;
+  color: var(--soft);
+  text-align: center;
+}
+
+.carousel__note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--hot);
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- pompons ---------- */
+
+.pompom {
+  position: absolute;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.pompom__img {
+  width: var(--size);
+  height: auto;
+  filter: drop-shadow(0 8px 10px rgb(80 10 40 / 0.35));
+}
+
+/* chaveiro: argola dourada + correntinha */
+.pompom__chain {
+  position: relative;
+  width: 3px;
+  height: 3.2rem;
+  margin-bottom: -0.9rem;
+  background: repeating-linear-gradient(180deg, #f6dc8c 0 5px, #b8892a 5px 7px);
+  border-radius: 2px;
+}
+
+.pompom__chain::before {
+  content: "";
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  translate: -50% 0;
+  border-radius: 50%;
+  border: 3px solid #e7c25a;
+  box-shadow: inset 0 0 0 1px #9c7420, 0 0 0 1px #9c7420;
+}
+
+.pompom--chain {
+  transform-origin: top center;
+  animation: swing 3.2s ease-in-out infinite;
+}
+
+@keyframes swing {
+  0%, 100% { rotate: 7deg; }
+  50% { rotate: -7deg; }
+}
+
+@media (max-width: 860px) {
+  .pompom {
+    scale: 0.65;
+  }
+}
+
+/* ---------- contato: pedidos ---------- */
+
+.requests__title {
+  font-size: clamp(3rem, 8vw, 6.75rem);
+  margin: 1rem 0 2.5rem;
+}
+
+.requests__sub {
+  max-width: 34rem;
+  margin: -1rem 0 2rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--soft);
+}
+
+.requests__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.25rem, 3.4vw, 2.25rem);
+  font-weight: 500;
+  border-bottom: 3px solid var(--hot);
+  padding-bottom: 0.2rem;
+  word-break: break-all;
+  transition: color 0.2s;
+}
+
+.requests__mail svg {
+  flex: none;
+  width: 0.9em;
+  height: 0.9em;
+  transition: transform 0.2s;
+}
+
+.requests__mail:hover {
+  color: var(--hot-text);
+}
+
+.requests__mail:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.requests__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  list-style: none;
+}
+
+/* ---------- rodapé ---------- */
+
+.footer {
+  position: relative;
+  padding: 1.5rem 0 2rem;
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+/* ---------- menos movimento ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cover .cd,
+  .disc,
+  .eq i,
+  .rec::before,
+  .band__track,
+  .flash,
+  .flash-inline,
+  .glam-title__star,
+  .glam-title__text,
+  .neon--flicker,
+  .pompom--chain,
+  .deco--float,
+  .cover-card[data-active="true"] .cover-card__cd,
+  .open-sign__dot,
+  .open-sign__script,
+  .open-sign::before,
+  .open-sign::after {
+    animation: none;
+  }
+}
+
+/* ---------- esconder enfeites (fica no fim do arquivo para valer sobre as outras regras) ---------- */
+
+/* enfeites que só aparecem no computador */
+@media (max-width: 860px) {
+  .deco--desktop {
+    display: none;
+  }
+}
+
+/* peças que ficam perto do título: só aparecem em telas largas, onde não encostam nele */
+@media (max-width: 1365px) {
+  .deco--wide {
+    display: none;
+  }
+}

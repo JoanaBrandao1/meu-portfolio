@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio · Joana Brandão
 
-## Getting Started
+Meu portfólio pessoal, com tema de player de música e clima baddie anos 2000: oncinha, strass, verde-limão, CD, Discman e letra cromada com glitter. O início é o "tocando agora", o sobre é o encarte, os projetos são as faixas e o contato é o lado B.
 
-First, run the development server:
+Feito com Next.js, TypeScript e Tailwind CSS.
+
+## Rodando localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Onde mexer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Textos, links e projetos:** `lib/constants.ts` (inclui `EXTERNAL`, os atributos de link que abre em outra aba). Para adicionar um projeto, coloque um item em `PROJECTS`, e ele vira uma capa no carrossel. Coloque a logo em `public/projetos/` e aponte em `logo`.
+- **Texto do "Sobre":** `app/(sections)/about-section.tsx`
+- **Visual do tema:** `app/playlist.css`. As cores ficam em `app/globals.css` (`--pink`, `--pink-secondary`, `--baby-pink`, `--background`, `--foreground`).
+- **Estampas:** as oncinhas (clássica, rosa da capa e as tom sobre tom do fundo, nude e noite) e o glitter ficam em `public/patterns/`, gerados por `scripts/oncinha.py` (`python3 scripts/oncinha.py public/patterns`). Mude as cores no fim do script.
+- **Letreiros de neon e brilhos:** `components/neon.tsx` (cifrão, coqueiro, coração, estrela de lâmpadas) e `components/sparkle.tsx` (estrela de flash). Para mudar de lugar, ajuste o `style` de cada um nas seções.
+- **Peças de fundo do "Sobre mim":** `components/deco.tsx` (também define `DecoProps`, as props comuns de toda decoração) (borboleta, adesivo de coração de oncinha, strass e CD). As formas são máscaras em `public/patterns/` (`borboleta.svg`, `coracao.svg`) e o preenchimento é CSS em `app/playlist.css`.
+- **Carrossel de capas e pompons:** `components/cover-carousel.tsx` e `components/pompom.tsx`.
+- **Discman (player do início):** `components/discman.tsx`.
+- **Ícones da topbar (GitHub, LinkedIn, email):** `app/links/social-links.tsx`. Para adicionar ou trocar um, edite a lista `LINKS` nesse arquivo.
+- **Logo (aba do navegador e topbar):** `app/icon.svg` (ícone da aba), `app/favicon.ico` e `app/apple-icon.png` (versões em imagem) e `public/logo-jb.svg` (topbar). As letras JB são da fonte Gloock (licença OFL) convertidas em desenho.
+- **Imagem de compartilhamento** (aparece quando o link é colado no LinkedIn/WhatsApp): `app/opengraph-image.png`, 1200×630.
+- **Currículo:** substitua `public/files/curriculo-joana-brandao.pdf` mantendo o mesmo nome.
 
-## Learn More
+## Classes úteis
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `deco--desktop`: esconde a peça no celular (até 860px).
+- `deco--wide`: esconde a peça em telas com menos de 1366px.
+- `gel-round`: botão redondo de gel rosa.
+- `flash flash--pink | flash--white | flash--lime`: estrela de flash com brilho.

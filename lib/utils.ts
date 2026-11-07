@@ -1,6 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-export function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+// Junta classes (aceita textos vazios, condições e objetos) e resolve conflitos do Tailwind.
+// Os componentes de components/ui dependem disso.
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
