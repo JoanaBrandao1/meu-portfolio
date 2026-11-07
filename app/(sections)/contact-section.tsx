@@ -1,7 +1,14 @@
+import type { ComponentProps } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { SITE, SOCIAL_LINKS } from "@/lib/constants";
+import { EXTERNAL, SITE, SOCIAL_LINKS } from "@/lib/constants";
 import { Neon } from "@/components/neon";
 import { Sparkle } from "@/components/sparkle";
+
+const buttons: (ComponentProps<"a"> & { label: string })[] = [
+  { label: "LinkedIn", href: SOCIAL_LINKS.linkedin, ...EXTERNAL },
+  { label: "GitHub", href: SOCIAL_LINKS.github, ...EXTERNAL },
+  { label: "Currículo", href: SITE.cv, download: true },
+];
 
 export default function ContactSection() {
   return (
@@ -29,21 +36,13 @@ export default function ContactSection() {
         </a>
 
         <ul className="requests__links">
-          <li>
-            <a className="btn btn--ghost" href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer">
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a className="btn btn--ghost" href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a className="btn btn--ghost" href={SITE.cv} download>
-              Currículo
-            </a>
-          </li>
+          {buttons.map(({ label, ...link }) => (
+            <li key={label}>
+              <a className="btn btn--ghost" {...link}>
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

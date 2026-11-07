@@ -2,7 +2,7 @@
 
 import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import type { Project } from "@/lib/constants";
+import { EXTERNAL, type Project } from "@/lib/constants";
 
 type Slide = { project?: Project; n: number };
 
@@ -46,6 +46,7 @@ export function CoverCarousel({ projects, total }: { projects: Project[]; total:
   };
 
   const current = slides[active];
+  const project = current.project;
 
   return (
     <div className="carousel" role="region" aria-roledescription="carrossel" aria-label="Projetos" tabIndex={0} onKeyDown={onKey}>
@@ -65,7 +66,7 @@ export function CoverCarousel({ projects, total }: { projects: Project[]; total:
               aria-current={offset === 0}
               tabIndex={Math.abs(offset) > 2 ? -1 : 0}
             >
-              <span className="cover-card__cd" aria-hidden="true" />
+              <span className="cd cover-card__cd" aria-hidden="true" />
               <span
                 className="cover-card__sleeve"
                 data-variant={(slide.n - 1) % 4}
@@ -91,27 +92,28 @@ export function CoverCarousel({ projects, total }: { projects: Project[]; total:
       </div>
 
       <div className="carousel__bar">
-        <button type="button" className="carousel__arrow" onClick={() => go(active - 1)} disabled={active === 0} aria-label="Capa anterior">
+        <button type="button" className="gel-round carousel__arrow" onClick={() => go(active - 1)} disabled={active === 0} aria-label="Capa anterior">
           <ChevronLeft aria-hidden="true" />
         </button>
 
         <div className="carousel__info" aria-live="polite">
           <p className="label carousel__n">Faixa {pad(current.n)}</p>
-          {current.project ? (
+          {project ? (
             <>
-              <h3 className="carousel__title">{current.project.title}</h3>
-              <p className="carousel__desc">{current.project.description}</p>
-              <p className="label">{current.project.stack.join(" · ")}</p>
+              <h3 className="carousel__title">{project.title}</h3>
+              <p className="carousel__desc">{project.description}</p>
+              <p className="label">{project.stack.join(" · ")}</p>
               <p className="carousel__links">
-                {current.project.href && (
-                  <a className="track__link" href={current.project.href} target="_blank" rel="noopener noreferrer">
-                    Ver site <ArrowUpRight size={14} aria-hidden="true" />
-                  </a>
-                )}
-                {current.project.repo && (
-                  <a className="track__link" href={current.project.repo} target="_blank" rel="noopener noreferrer">
-                    Código <ArrowUpRight size={14} aria-hidden="true" />
-                  </a>
+                {[
+                  { label: "Ver site", href: project.href },
+                  { label: "Código", href: project.repo },
+                ].map(
+                  ({ label, href }) =>
+                    href && (
+                      <a key={label} className="carousel__link" href={href} {...EXTERNAL}>
+                        {label} <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    ),
                 )}
               </p>
             </>
@@ -123,7 +125,7 @@ export function CoverCarousel({ projects, total }: { projects: Project[]; total:
           )}
         </div>
 
-        <button type="button" className="carousel__arrow" onClick={() => go(active + 1)} disabled={active === count - 1} aria-label="Próxima capa">
+        <button type="button" className="gel-round carousel__arrow" onClick={() => go(active + 1)} disabled={active === count - 1} aria-label="Próxima capa">
           <ChevronRight aria-hidden="true" />
         </button>
       </div>

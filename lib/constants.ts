@@ -5,13 +5,16 @@ export const SITE = {
   role: "Engenheira da computação · Desenvolvedora full-stack",
   email: "joanab.dev@gmail.com",
   cv: "/files/curriculo-joana-brandao.pdf",
-  year: 2026,
+  year: new Date().getFullYear(),
 };
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/JoanaBrandao1",
   linkedin: "https://www.linkedin.com/in/joana-beatriz-brandao/",
 };
+
+// atributos de link que abre em outra aba (usado em todos os links externos)
+export const EXTERNAL = { target: "_blank", rel: "noopener noreferrer" } as const;
 
 export type Project = {
   title: string;

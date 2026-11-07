@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Theme, GithubLink, LinkedinLink, EmailLink } from "@/app/links";
+import { SocialLinks, Theme } from "@/app/links";
 
 const links = [
   { href: "#sobre", label: "Sobre" },
@@ -28,15 +28,7 @@ export function Navbar() {
           </div>
 
           <div className="topbar__icons">
-            <span className="hide-sm">
-              <GithubLink />
-            </span>
-            <span className="hide-sm">
-              <LinkedinLink />
-            </span>
-            <span className="hide-sm">
-              <EmailLink />
-            </span>
+            <SocialLinks className="hide-sm" />
             <Theme />
           </div>
         </div>

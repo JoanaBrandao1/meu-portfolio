@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { DecoProps } from "./deco";
 
 // Letreiros de neon para o fundo: cifrão, coqueiro, coração e estrela de lâmpadas.
 // São só decoração (aria-hidden) e ficam atrás do conteúdo.
@@ -51,11 +51,7 @@ export function Neon({
   kind,
   className = "",
   style,
-}: {
-  kind: Kind;
-  className?: string;
-  style?: CSSProperties;
-}) {
+}: DecoProps & { kind: Kind }) {
   if (kind === "cifrao") {
     // cifrão de dinheiro: S com duas listras, tubo laranja e contorno verde
     const S = "M46 24C46 14 38 10 30 10 20 10 13 16 13 25 13 35 22 38 30 41 39 44 47 48 47 58 47 69 39 74 30 74 20 74 12 68 12 58";

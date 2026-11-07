@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import type { DecoProps } from "./deco";
 
 // Pompom rosa de líder de torcida (imagens em public/images).
 // `shape="coracao"` usa o pompom em formato de coração. Com `chain`, vira chaveiro pendurado e balança.
@@ -14,12 +15,10 @@ export function Pompom({
   chain = false,
   className = "",
   style,
-}: {
+}: DecoProps & {
   size?: string;
   shape?: keyof typeof IMAGES;
   chain?: boolean;
-  className?: string;
-  style?: CSSProperties;
 }) {
   const img = IMAGES[shape];
   return (

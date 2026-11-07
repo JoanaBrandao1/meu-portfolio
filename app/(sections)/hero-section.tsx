@@ -2,23 +2,14 @@
 
 import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowDown, ArrowDownToLine, Pause, Play } from "lucide-react";
+import { ArrowDown, ArrowDownToLine } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { Sparkle } from "@/components/sparkle";
 import { Neon } from "@/components/neon";
-
-const DURATION = 197; // 3:17, a "duração" da faixa de abertura
-const SEGMENTS = 18; // quadradinhos da barra no visor
-
-function formatTime(seconds: number) {
-  const m = Math.floor(seconds / 60);
-  const s = String(seconds % 60).padStart(2, "0");
-  return `${m}:${s}`;
-}
+import { Discman } from "@/components/discman";
 
 export default function HeroSection() {
   const [playing, setPlaying] = useState(true);
-  const [elapsed, setElapsed] = useState(42);
 
   // quem pediu "menos movimento" no sistema começa com o disco parado
   useEffect(() => {
@@ -27,12 +18,6 @@ export default function HeroSection() {
       setPlaying(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (!playing) return;
-    const id = setInterval(() => setElapsed((t) => (t + 1) % DURATION), 1000);
-    return () => clearInterval(id);
-  }, [playing]);
 
   return (
     <section id="inicio" className="np" data-playing={playing}>
@@ -97,9 +82,9 @@ export default function HeroSection() {
         <div className="np__art">
           <div className="cover">
             <div className="cd" aria-hidden="true" />
-            <Sparkle className="sparkle--a" />
-            <Sparkle className="sparkle--b" />
-            <Sparkle className="sparkle--c" />
+            <Sparkle className="flash flash--pink" style={{ top: "-7%", left: "-8%", width: "3.2rem" }} />
+            <Sparkle className="flash flash--white" style={{ top: "9%", left: "-12%", width: "1.3rem" }} />
+            <Sparkle className="flash flash--lime" style={{ bottom: "-8%", right: "-24%", width: "2.4rem" }} />
             <div className="sleeve">
               <div className="sleeve__title">
                 <span>{SITE.name}</span>
@@ -118,32 +103,7 @@ export default function HeroSection() {
           </div>
 
           <Sparkle className="flash flash--pink" style={{ bottom: "-1.6rem", left: "-1.8rem", width: "2.2rem" }} />
-          <div className="discman">
-            <button
-              type="button"
-              className="discman__play"
-              onClick={() => setPlaying((p) => !p)}
-              aria-label={playing ? "Pausar" : "Tocar"}
-            >
-              {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
-            </button>
-
-            <div className="lcd" role="group" aria-label={`Faixa 00, ${formatTime(elapsed)} de ${formatTime(DURATION)}`}>
-              <div className="lcd__row">
-                <span>{playing ? "▶" : "❚❚"} 00</span>
-                <span className="lcd__title">Olá, eu sou a Joana</span>
-              </div>
-              <div className="lcd__row">
-                <span>{formatTime(elapsed)}</span>
-                <span className="lcd__bar" aria-hidden="true">
-                  {Array.from({ length: SEGMENTS }, (_, i) => (
-                    <i key={i} data-on={i < Math.round((elapsed / DURATION) * SEGMENTS)} />
-                  ))}
-                </span>
-                <span>{formatTime(DURATION)}</span>
-              </div>
-            </div>
-          </div>
+          <Discman playing={playing} onToggle={() => setPlaying((p) => !p)} />
         </div>
       </div>
     </section>

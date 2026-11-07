@@ -44,7 +44,6 @@ export default function AboutSection() {
             <WavyTitle text="Sobre mim" />
             {/* pousada no fim do título; a posição acompanha o esticamento (--title-stretch em playlist.css) */}
             <Butterfly
-              tone="pink"
               className="deco--float"
               style={{ left: "var(--butterfly-x)", top: "var(--butterfly-y)", marginLeft: "0.5rem", width: "clamp(2.6rem, 6vw, 4.4rem)", rotate: "-14deg" }}
             />

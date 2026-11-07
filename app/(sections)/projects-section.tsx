@@ -1,4 +1,4 @@
-import { PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
+import { EXTERNAL, PROJECTS, SOCIAL_LINKS, TRACKLIST_SIZE } from "@/lib/constants";
 import { Neon } from "@/components/neon";
 import { Sparkle } from "@/components/sparkle";
 import { CoverCarousel } from "@/components/cover-carousel";
@@ -18,7 +18,7 @@ export default function ProjectsSection() {
       <Pompom size="11.5rem" style={{ top: "1rem", right: "13%", rotate: "-12deg" }} />
       <Pompom size="7rem" style={{ top: "9rem", right: "5%", rotate: "20deg" }} />
       <Pompom size="8rem" shape="coracao" chain style={{ top: "0", left: "8%" }} />
-      <Pompom size="10rem" shape="coracao" className="pompom--desktop" style={{ bottom: "3rem", right: "3%", rotate: "10deg" }} />
+      <Pompom size="10rem" shape="coracao" className="deco--desktop" style={{ bottom: "3rem", right: "3%", rotate: "10deg" }} />
 
       <div className="wrap">
         <header className="section-head">
@@ -37,9 +37,9 @@ export default function ProjectsSection() {
 
         <CoverCarousel projects={PROJECTS} total={TRACKLIST_SIZE} />
 
-        <p className="tracks__note">
+        <p className="carousel__note">
           As primeiras faixas saem em breve. Enquanto isso, os rascunhos ficam no{" "}
-          <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.github} {...EXTERNAL}>
             meu GitHub
           </a>
           .
