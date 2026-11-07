@@ -1298,7 +1298,7 @@ body::before {
   translate: 0 -0.1em;
 }
 
-/* ---------- projetos: título no estilo do logo JB ---------- */
+/* ---------- projetos: título no estilo do logo JB (Gloock), em prata ---------- */
 
 .glam-title {
   position: relative;
@@ -1314,17 +1314,28 @@ body::before {
 }
 
 .glam-title__text {
-  background: linear-gradient(180deg, #ffe9f4 0%, #ff8cc6 28%, #ff3d9e 50%, #b80f63 53%, #ff5fb0 72%, #ffd0e8 100%);
+  /* cromado prata: reflexo de luz passando + glitter + metal com a faixa escura no meio */
+  background:
+    linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.95) 50%, transparent 60%) -150% 0 / 250% 100% no-repeat,
+    var(--glitter) 0 0 / 120px,
+    linear-gradient(180deg, #ffffff 0%, #eef1f5 22%, #c3cad3 46%, #5b6470 50%, #8e98a4 54%, #dfe4ea 74%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* contorno escuro em volta das letras (como no logo) + sombra rosa embaixo */
+  /* contorno escuro em volta das letras (como no logo) + sombra embaixo */
   filter:
     drop-shadow(0.03em 0 0 #2b1621)
     drop-shadow(-0.03em 0 0 #2b1621)
     drop-shadow(0 0.03em 0 #2b1621)
     drop-shadow(0 -0.03em 0 #2b1621)
-    drop-shadow(0 0.06em 0 #8a0c4b);
+    drop-shadow(0 0.06em 0 #3a3f47);
+  animation: chrome-shine 5s ease-in-out infinite;
+}
+
+/* a faixa de luz atravessa as letras e some, a cada 5s */
+@keyframes chrome-shine {
+  0%, 55% { background-position: -150% 0, 0 0, 0 0; }
+  85%, 100% { background-position: 250% 0, 0 0, 0 0; }
 }
 
 .glam-title__star {
@@ -1794,6 +1805,7 @@ body::before {
   .flash,
   .flash-inline,
   .glam-title__star,
+  .glam-title__text,
   .neon--flicker,
   .pompom--chain,
   .deco--float,
