@@ -14,6 +14,14 @@ export const SOCIAL_LINKS = {
   whatsapp: "https://wa.me/5581973260632",
 };
 
+// música do Discman (player oficial do Spotify). Para trocar, copie o link da faixa no Spotify
+// (Compartilhar → Copiar link da música) e use o código que vem depois de /track/.
+export const MUSIC = {
+  title: "That Girl",
+  artist: "Tyla",
+  spotifyUri: "spotify:track:6fJmCfeuoRyRKl54qGg4bw",
+};
+
 // atributos de link que abre em outra aba (usado em todos os links externos)
 export const EXTERNAL = { target: "_blank", rel: "noopener noreferrer" } as const;
 
