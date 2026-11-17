@@ -34,7 +34,7 @@ export function Discman({ playing, onToggle }: { playing: boolean; onToggle: () 
       <div className="lcd" role="group" aria-label={`Faixa 00, ${formatTime(elapsed)} de ${formatTime(DURATION)}`}>
         <div className="lcd__row">
           <span>{playing ? "▶" : "❚❚"} 00</span>
-          <span className="lcd__title">Olá, eu sou a Joana</span>
+          <span className="lcd__title">Olá, eu sou Joana</span>
         </div>
         <div className="lcd__row">
           <span>{formatTime(elapsed)}</span>
