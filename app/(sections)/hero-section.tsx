@@ -103,7 +103,7 @@ export default function HeroSection() {
           </div>
 
           <Sparkle className="flash flash--pink" style={{ bottom: "-1.6rem", left: "-1.8rem", width: "2.2rem" }} />
-          <Discman playing={playing} onPlayingChange={setPlaying} />
+          <Discman playing={playing} onToggle={() => setPlaying((p) => !p)} />
         </div>
       </div>
     </section>
