@@ -612,6 +612,20 @@ body::before {
 }
 
 /* discman */
+/* player oficial do Spotify, logo abaixo do Discman */
+.spotify-embed {
+  margin-top: 0.75rem;
+  min-height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a0d13; /* aparece só enquanto o player carrega */
+}
+
+.spotify-embed iframe {
+  display: block;
+  border: 0;
+}
+
 .discman {
   display: flex;
   align-items: center;
