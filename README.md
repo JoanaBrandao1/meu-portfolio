@@ -22,7 +22,7 @@ Abra [http://localhost:3000](http://localhost:3000).
 - **Letreiros de neon e brilhos:** `components/neon.tsx` (cifrão, coqueiro, coração, estrela de lâmpadas) e `components/sparkle.tsx` (estrela de flash). Para mudar de lugar, ajuste o `style` de cada um nas seções.
 - **Peças de fundo do "Sobre mim":** `components/deco.tsx` (também define `DecoProps`, as props comuns de toda decoração) (borboleta, adesivo de coração de oncinha, strass e CD). As formas são máscaras em `public/patterns/` (`borboleta.svg`, `coracao.svg`) e o preenchimento é CSS em `app/playlist.css`.
 - **Carrossel de capas e pompons:** `components/cover-carousel.tsx` e `components/pompom.tsx`.
-- **Discman (player do início):** `components/discman.tsx`. A música é o player oficial do Spotify; para trocar de faixa, mude `MUSIC.spotifyUri` em `lib/constants.ts`.
+- **Discman (player do início):** `components/discman.tsx`.
 - **Ícones da topbar (GitHub, LinkedIn, email):** `app/links/social-links.tsx`. Para adicionar ou trocar um, edite a lista `LINKS` nesse arquivo.
 - **Logo (aba do navegador e topbar):** `app/icon.svg` (ícone da aba), `app/favicon.ico` e `app/apple-icon.png` (versões em imagem) e `public/logo-jb.svg` (topbar). As letras JB são da fonte Gloock (licença OFL) convertidas em desenho.
 - **Imagem de compartilhamento** (aparece quando o link é colado no LinkedIn/WhatsApp): `app/opengraph-image.png`, 1200×630.
